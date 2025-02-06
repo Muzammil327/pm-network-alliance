@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "DM Sans", serif;
+}
+body {
+  background-color: black;
+}
+.join_btn {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #00ccff;
+  transition: border 300ms ease-in-out;
+  color: white;
+}
+
+.join_btn::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 200px;
+  background-color: #00ccff;
+  transition: 300ms ease-in-out;
+  transform-origin: bottom left;
+  z-index: -1;
+}
+
+.join_btn:hover::after {
+  left: -100%;
+}
+
+.custom_container {
+  max-width: 1200px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin: 0 auto;
+}
+.bg_image {
+  background-image: url("./assets/images/png/loginbox.png");
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  background-position: center;
+}
+
+@keyframes borderRotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.btn_animate {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn_animate::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 35%;
+  background: conic-gradient(#00ccff 20deg, transparent 200deg);
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: borderRotate 2s linear infinite;
+  transform-origin: 50% 100%;
+  transition: ease-in-out;
+  z-index: -1;
+}
