@@ -16,7 +16,7 @@ const EditTool = () => {
     const fetchCourse = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/tools/get/${id}`
+          `https://backend.pmnetworkalliance.com/api/tools/get/${id}`
         );
         console.log("response", response);
         setSelectedCourse(response.data);

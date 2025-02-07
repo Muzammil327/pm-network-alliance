@@ -55,7 +55,7 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
 
     try {
       const response = await axios.delete(
-        "http://localhost:5000/api/delete-image", {
+        "https://backend.pmnetworkalliance.com/api/delete-image", {
           data: { imageUrl },
         }
       );
@@ -67,7 +67,6 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
       console.error(error);
     }
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -91,13 +90,13 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
       let response;
       if (existingTool) {
         response = await axios.put(
-          `http://localhost:5000/api/tools/update/${existingTool._id}`,
+          `https://backend.pmnetworkalliance.com/api/tools/update/${existingTool._id}`,
           formDataToSend,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
       } else {
         response = await axios.post(
-          "http://localhost:5000/api/tools/create",
+          "https://backend.pmnetworkalliance.com/api/tools/create",
           formDataToSend,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
@@ -127,7 +126,6 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
   };
 
   const refreshImageUrl = (url: string) => `${url}?t=${Date.now()}`;
-
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 my-10 mx-80">

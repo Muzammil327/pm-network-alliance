@@ -12,7 +12,7 @@ const Course = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/courses/get?page=${currentPage}&limit=6`
+        `https://backend.pmnetworkalliance.com/api/courses/get?page=${currentPage}&limit=6`
       );
       setCoursesData(response.data.courses);
       setTotalPages(response.data.totalPages); // Set total pages from the response
@@ -30,7 +30,7 @@ const Course = () => {
   const deleteCourse = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/courses/delete/${id}`
+        `https://backend.pmnetworkalliance.com/api/courses/delete/${id}`
       );
       console.log("Course deleted:", response.data);
       getCourse(); // Re-fetch courses after deletion

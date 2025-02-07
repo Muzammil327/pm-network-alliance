@@ -73,14 +73,14 @@ const CourseForm: React.FC<CourseFormProps> = ({
         console.log(existingCourse)
         // **Update Course**
         response = await axios.put(
-          `http://localhost:5000/api/courses/update/${existingCourse._id}`,
+          `https://backend.pmnetworkalliance.com/api/courses/update/${existingCourse._id}`,
           formDataToSend,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
       } else {
         // **Add Course**
         response = await axios.post(
-          "http://localhost:5000/api/courses/create",
+          "https://backend.pmnetworkalliance.com/api/courses/create",
           formDataToSend,
           { headers: { "Content-Type": "multipart/form-data" } }
         );

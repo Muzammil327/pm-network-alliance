@@ -24,7 +24,7 @@ const AiToolbox = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/tools/get-catgeory`
+        `https://backend.pmnetworkalliance.com/api/tools/get-catgeory`
       );
       setCategory(response.data.categorys);
       setLoading(false);
@@ -37,7 +37,7 @@ const AiToolbox = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/tools/get-subcatgeory`
+        `https://backend.pmnetworkalliance.com/api/tools/get-subcatgeory`
       );
       setSubCatgeory(response.data.subcategory);
       setLoading(false);
@@ -51,7 +51,7 @@ const AiToolbox = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/tools/get?page=${currentPage}&limit=8&category=${selectedCategory}&subcatgeory=${selectedSubCatgeory}&searchTerm=${searchTerm}`
+        `https://backend.pmnetworkalliance.com/api/tools/get?page=${currentPage}&limit=8&category=${selectedCategory}&subcatgeory=${selectedSubCatgeory}&searchTerm=${searchTerm}`
       );
       setCoursesData(response.data.tools);
       setTotalPages(response.data.totalPages); // Set total pages from the response
