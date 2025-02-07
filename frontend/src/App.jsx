@@ -11,7 +11,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
 import About from "./pages/About";
-import Dashboard from "./pages/Dashboard";
 import Course from "./pages/Course";
 import AddCourse from "./pages/AddCourse";
 import Tool from "./pages/Tool";

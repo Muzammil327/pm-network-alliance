@@ -11,9 +11,8 @@ const AiToolbox = () => {
 
   const [category, setCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  
-  const [openDropdown, setOpenDropdown] = useState(null);
 
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const [subCatgeory, setSubCatgeory] = useState([]);
   const [selectedSubCatgeory, setSelectedSubCatgeory] = useState("");
@@ -51,7 +50,7 @@ const AiToolbox = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://backend.pmnetworkalliance.com/api/tools/get?page=${currentPage}&limit=8&category=${selectedCategory}&subcatgeory=${selectedSubCatgeory}&searchTerm=${searchTerm}`
+        `https://backend.pmnetworkalliance.com/api/tools/get?page=${currentPage}&limit=12&category=${selectedCategory}&subcatgeory=${selectedSubCatgeory}&searchTerm=${searchTerm}`
       );
       setCoursesData(response.data.tools);
       setTotalPages(response.data.totalPages); // Set total pages from the response
@@ -69,12 +68,12 @@ const AiToolbox = () => {
       getSubCatgeory();
       return;
     }
-  
+
     const delayDebounce = setTimeout(() => {
       getCourse(); // Delay API call when searchTerm is typed
     }, 2000);
-  
-    return () => clearTimeout(delayDebounce); 
+
+    return () => clearTimeout(delayDebounce);
   }, [currentPage, getCourse, searchTerm]);
 
   const toggleDropdownCategory = (item) => {
@@ -86,17 +85,16 @@ const AiToolbox = () => {
     setCurrentPage(page); // Set the current page
   };
 
-  
   const handleCategorySelect = (selected) => {
-    setSelectedSubCatgeory("")
+    setSelectedSubCatgeory("");
     setSelectedCategory(selected);
-    setOpenDropdown(null); 
+    setOpenDropdown(null);
     setCurrentPage(1);
   };
   const handleSubcatgeorySelect = (selected) => {
-    setSelectedCategory("")
+    setSelectedCategory("");
     setSelectedSubCatgeory(selected);
-    setOpenDropdown(null); 
+    setOpenDropdown(null);
     setCurrentPage(1);
   };
 
@@ -181,7 +179,12 @@ const AiToolbox = () => {
 
               {openDropdown === "Category" && (
                 <div className="absolute left-0 mt-2 w-40 bg-[#1E2528] text-white rounded-lg shadow-lg z-10">
-                  <ul className="py-2">
+                  <ul
+                    className="py-2 h-40 overflow-y-auto overflow-x-hidden scroll-smooth"
+                    style={{
+                      scrollbarWidth: "thin",
+                    }}
+                  >
                     {category.length > 0 ? (
                       category.map((data) => (
                         <li
@@ -207,7 +210,7 @@ const AiToolbox = () => {
                 <p className="text-white">Sub Category</p>
                 <svg
                   width="20"
-                  height="20" 
+                  height="20"
                   viewBox="0 0 20 20"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -223,8 +226,13 @@ const AiToolbox = () => {
               </div>
 
               {openDropdown === "SubCategory" && (
-                <div className="absolute left-0 mt-2 w-40 bg-[#1E2528] text-white rounded-lg shadow-lg z-10">
-                  <ul className="py-2">
+                <div className="absolute left-0 mt-2 w-48 bg-[#1E2528] text-white rounded-lg shadow-lg z-10">
+                  <ul
+                    className="py-2 h-40 overflow-y-auto overflow-x-hidden scroll-smooth"
+                    style={{
+                      scrollbarWidth: "thin",
+                    }}
+                  >
                     {subCatgeory.length > 0 ? (
                       subCatgeory?.map((data) => (
                         <li
@@ -236,7 +244,9 @@ const AiToolbox = () => {
                         </li>
                       ))
                     ) : (
-                      <li className="px-4 py-2 text-gray-400">No SubCategory</li>
+                      <li className="px-4 py-2 text-gray-400">
+                        No SubCategory
+                      </li>
                     )}
                   </ul>
                 </div>

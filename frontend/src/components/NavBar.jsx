@@ -61,11 +61,11 @@ const NavBar = () => {
           </nav>
 
           {/* Join Now Button (Visible on large screens) */}
-          <div className="hidden lg:block">
+          {/* <div className="hidden lg:block">
             <button className="border border-[#313B3D] py-[9px] px-6 rounded-[200px] text-white font-semibold text-lg ">
               Join Now
             </button>
-          </div>
+          </div> */}
 
           {/* Mobile Menu Button (☰ / ✖) */}
           <button

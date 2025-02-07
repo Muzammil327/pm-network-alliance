@@ -191,6 +191,7 @@ const GetToolCatgeory = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 }
+
 const GetToolSubCatgeory = async (req, res) => {
   try {
     const subcategory = await Tool.distinct("subcategory");
@@ -201,6 +202,36 @@ const GetToolSubCatgeory = async (req, res) => {
   }
 }
 
+const DeleteToolImage = async (req, res) => {
+  try {
+        const { imageUrl } = req.body;
+        console.log("imageUrl:", imageUrl);
+  
+        if (!imageUrl) {
+            return res.status(400).json({ message: "No image URL provided" });
+        }
+  
+        // Extracting public_id correctly
+        const parts = imageUrl.split("/");
+        const filenameWithVersion = parts[parts.length - 1]; // "v1738850006/gqyin1txuznh4r4yrwtm.png"
+        const filename = filenameWithVersion.split(".")[0];  // "gqyin1txuznh4r4yrwtm"
+  
+        console.log("Correct public_id:", filename);
+  
+        // Delete the image from Cloudinary
+        const response = await cloudinary.uploader.destroy(filename);
+        console.log("Cloudinary response:", response);
+  
+        if (response.result !== "ok") {
+            return res.status(400).json({ message: "Failed to delete image" });
+        }
+  
+        res.status(200).json({ message: "Image deleted successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
 
 
 

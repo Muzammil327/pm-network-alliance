@@ -237,7 +237,7 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
               className="w-full h-auto object-cover rounded-md"
             />
             <button
-              type="button"  onClick={() => handleDeleteImage(existingImage)}
+              type="button" onClick={() => handleDeleteImage(existingImage)}
 
               className="absolute top-2 right-2 bg-red-600 text-white rounded-full h-12 w-12 text-lg"
             >

@@ -13,7 +13,7 @@ const FreeCourse = () => {
 
   const [category, setCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  
+
   const [platform, setPlatform] = useState([]);
   const [selectedPlatform, setSelectedPlatform] = useState("");
 
@@ -68,12 +68,12 @@ const FreeCourse = () => {
       getPlatform();
       return;
     }
-  
+
     const delayDebounce = setTimeout(() => {
       getCourse(); // Delay API call when searchTerm is typed
     }, 2000);
-  
-    return () => clearTimeout(delayDebounce); 
+
+    return () => clearTimeout(delayDebounce);
   }, [currentPage, getCourse, searchTerm]);
 
   const toggleDropdownCategory = (item) => {
@@ -86,18 +86,18 @@ const FreeCourse = () => {
   };
 
   const handleCategorySelect = (selected) => {
-    setSelectedPlatform("")
+    setSelectedPlatform("");
     setSelectedCategory(selected);
-    setOpenDropdown(null); 
+    setOpenDropdown(null);
     setCurrentPage(1);
   };
   const handlePlatformSelect = (selected) => {
-    setSelectedCategory("")
+    setSelectedCategory("");
     setSelectedPlatform(selected);
-    setOpenDropdown(null); 
+    setOpenDropdown(null);
     setCurrentPage(1);
   };
-  
+
   return (
     <div className="custom_container px-4 sm:px-6 lg:px-8">
       {/* hero */}
@@ -176,7 +176,12 @@ const FreeCourse = () => {
 
               {openDropdown === "Platform" && (
                 <div className="absolute left-0 mt-2 w-40 bg-[#1E2528] text-white rounded-lg shadow-lg z-10">
-                  <ul className="py-2">
+                  <ul
+                    className="py-2 h-40 overflow-y-auto overflow-x-hidden scroll-smooth"
+                    style={{
+                      scrollbarWidth: "thin",
+                    }}
+                  >
                     {platform.length > 0 ? (
                       platform?.map((data) => (
                         <li
@@ -219,7 +224,12 @@ const FreeCourse = () => {
 
               {openDropdown === "Category" && (
                 <div className="absolute left-0 mt-2 w-40 bg-[#1E2528] text-white rounded-lg shadow-lg z-10">
-                  <ul className="py-2">
+                  <ul
+                    className="py-2 h-40 overflow-y-auto overflow-x-hidden scroll-smooth"
+                    style={{
+                      scrollbarWidth: "thin",
+                    }}
+                  >
                     {category.length > 0 ? (
                       category.map((data) => (
                         <li
