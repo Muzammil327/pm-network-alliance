@@ -64,14 +64,14 @@ const HeroPage = () => {
           <div
             data-aos="fade-left"
             className="w-10/12 sm:w-8/12 md:w-6/12 lg:w-6/12 xl:w-4/12 2xl
-            :w-5/12 flex justify-center lg:justify-end relative mt-10"
+            :w-5/12 flex justify-center lg:justify-start relative mt-0"
           >
             <img
               src={HeroImage}
               alt="HeroPage"
-              className="w-10/12 md:w-[70%] 2xl:w-[90%]"
+              className="w-10/12 md:w-[80%] 2xl:w-[90%]"
             />
-            <div className="absolute lg:right-[-60%] -z-10 top-[-13%]">
+            <div className="absolute lg:right-[-60%] -z-10 top-[-43%]">
               <BoxShadow />
             </div>
           </div>

@@ -23,30 +23,37 @@ app.use("/api/tools", toolRoutes);
 
 // Delete image of cloudinary
 app.delete("/api/delete-image", async (req, res) => {
-    try {
+  try {
       const { imageUrl } = req.body;
+      console.log("imageUrl:", imageUrl);
+
       if (!imageUrl) {
-        return res.status(400).json({ message: "No image URL provided" });
+          return res.status(400).json({ message: "No image URL provided" });
       }
-  
-      // Extract public_id from the image URL
-      const regex = /\/v[0-9]+\/(.*?)\./;
-      const match = imageUrl.match(regex);
-      if (!match || !match[1]) {
-        return res.status(400).json({ message: "Invalid image URL" });
-      }
-  
-      const public_id = match[1];
-  
+
+      // Extracting public_id correctly
+      const parts = imageUrl.split("/");
+      const filenameWithVersion = parts[parts.length - 1]; // "v1738850006/gqyin1txuznh4r4yrwtm.png"
+      const filename = filenameWithVersion.split(".")[0];  // "gqyin1txuznh4r4yrwtm"
+
+      console.log("Correct public_id:", filename);
+
       // Delete the image from Cloudinary
-      await cloudinary.uploader.destroy(public_id);
-  
+      const response = await cloudinary.uploader.destroy(filename);
+      console.log("Cloudinary response:", response);
+
+      if (response.result !== "ok") {
+          return res.status(400).json({ message: "Failed to delete image" });
+      }
+
       res.status(200).json({ message: "Image deleted successfully" });
-    } catch (error) {
+  } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Server Error" });
-    }
-  });
+  }
+});
+
+
   
 
 // Start Server

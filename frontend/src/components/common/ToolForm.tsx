@@ -60,6 +60,7 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
         }
       );
       if (response.status === 200) {
+        window.location.reload();
         setExistingImage(null);
       }
     } catch (error) {
@@ -124,6 +125,9 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
       setLoading(false);
     }
   };
+
+  const refreshImageUrl = (url: string) => `${url}?t=${Date.now()}`;
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 my-10 mx-80">
@@ -230,7 +234,7 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
         {existingImage ? (
           <div className="relative">
             <img
-              src={existingImage}
+              src={refreshImageUrl(existingImage)}
               alt="Tool"
               className="w-full h-auto object-cover rounded-md"
             />

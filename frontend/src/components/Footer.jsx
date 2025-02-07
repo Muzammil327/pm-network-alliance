@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="bg-[#12181A] py-[64px] w-full mt-10">
+    <div className="bg-[#121819] py-[64px] w-full mt-10">
       <div data-aos="fade-up" className="custom_container">
         <img className="cursor-pointer" src={logo} alt="" />
 
@@ -51,7 +51,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-[0.5px] bg-gradient-to-b from-[#0B0F0E] mt-[48px] via-[#263531] to-[#0B0F0E] opacity-[20%]"></div>
+        <div className="!border-[0.1px] bg-gradient-to-b from-[#0B0F0E] mt-[48px] via-[#263531] to-[#0B0F0E] opacity-[5%]"></div>
 
         <p className="text-center mt-[48px] font-normal text-[12px] leading-[16px] tracking-[0.26px] text-white">
           Design with love © TanahAirStudio 2020. All right reserved

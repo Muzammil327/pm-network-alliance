@@ -32,7 +32,7 @@ const FormBox = () => {
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      navigate("/dashboard");
+      navigate("/dashboard/courses");
     } catch (error) {
       console.error(error.message);
     }

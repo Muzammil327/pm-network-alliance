@@ -22,12 +22,13 @@ const CreateTool = async (req, res) => {
 
       // Upload image to Cloudinary
       const uploadResponse = await cloudinary.uploader.upload(
-        files.imageFile[0].filepath,
+        files.image[0].filepath,
         {
           folder: "tools/images",
         }
       );
 
+      console.log("uploadResponse:", uploadResponse)
       // Create tool with uploaded image URL
       const newTool = new Tool({
         toolName,

@@ -38,7 +38,7 @@ const NavBar = () => {
           <nav className="hidden lg:flex gap-10">
             <ul className="flex gap-10">
               {[
-                { name: "Home", path: "/home" },
+                { name: "Home", path: "/" },
                 { name: "Free Courses", path: "/freeCourse" },
                 { name: "AI Toolbox", path: "/AiToolbox" },
                 { name: "Newsletter", path: "/Newsletter" },
@@ -62,7 +62,7 @@ const NavBar = () => {
 
           {/* Join Now Button (Visible on large screens) */}
           <div className="hidden lg:block">
-            <button className="border border-[#313B3D] py-[9px] px-6 rounded-[200px] text-white font-semibold text-lg join_btn">
+            <button className="border border-[#313B3D] py-[9px] px-6 rounded-[200px] text-white font-semibold text-lg ">
               Join Now
             </button>
           </div>
@@ -93,7 +93,7 @@ const NavBar = () => {
 
         <ul className="flex flex-col gap-8 text-white text-xl">
           {[
-            { name: "Home", path: "/home" },
+            { name: "Home", path: "/" },
             { name: "Free Courses", path: "/freeCourse" },
             { name: "AI Toolbox", path: "/AiToolbox" },
             { name: "Newsletter", path: "/Newsletter" },
@@ -125,7 +125,7 @@ const NavBar = () => {
       )}
 
       {/* Gradient Border */}
-      <div className="border-[0.5px] bg-gradient-to-b from-[#0B0F0E] via-[#263531] to-[#0B0F0E] opacity-[20%]"></div>
+      <div className="border-[0.5px] bg-gradient-to-b from-[#0B0F0E] via-[#263531] to-[#0B0F0E] opacity-[10%]"></div>
     </>
   );
 };

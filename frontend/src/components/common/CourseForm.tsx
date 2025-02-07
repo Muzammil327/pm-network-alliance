@@ -59,7 +59,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
       const formDataToSend = new FormData();
       Object.keys(formData).forEach((key) => {
         const value = formData[key as keyof typeof formData];
-        if (key !== "imageFile" && typeof value === "string") {
+        if (key === "imageFile" && typeof value === "string") {
           formDataToSend.append(key, value);
         }
       });
@@ -86,7 +86,6 @@ const CourseForm: React.FC<CourseFormProps> = ({
         );
       }
 
-      console.log("Response:", response.data);
       onSuccess(); // Refresh courses after submission
       setFormData({
         platform: "",

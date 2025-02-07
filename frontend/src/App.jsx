@@ -34,7 +34,7 @@ function App() {
     if (!token && location.pathname.startsWith("/dashboard")) {
       navigate("/admin");
     }
-  }, []);
+  }, [location.pathname, navigate]);
 
   return (
     <>
@@ -47,7 +47,6 @@ function App() {
         <Route path="/AiToolbox" element={<AiToolbox />} />
         <Route path="/Newsletter" element={<NewsLetter />} />
         <Route path="/about" element={<About />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/courses" element={<Course />} />
         <Route path="/dashboard/courses/add" element={<AddCourse />} />
         <Route path="/dashboard/courses/edit/:id" element={<EditCourse />} />

@@ -38,7 +38,6 @@ const DashboardNavBar = () => {
           <nav className="hidden lg:flex gap-10">
             <ul className="flex gap-10">
               {[
-                { name: "Home", path: "/dashboard" },
                 { name: "Courses", path: "/dashboard/courses" },
                 { name: "Tools", path: "/dashboard/tools" },
               ].map((link) => (
@@ -84,7 +83,6 @@ const DashboardNavBar = () => {
 
         <ul className="flex flex-col gap-8 text-white text-xl">
           {[
-            { name: "Home", path: "/dashboard" },
             { name: "Courses", path: "/courses" },
             { name: "Tools", path: "/tools" },
           ].map((link) => (

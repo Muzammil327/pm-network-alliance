@@ -123,7 +123,7 @@ const FreeCourse = () => {
       </div>
 
       {/* courses */}
-      <section>
+      <section className="md:!mt-16 mt-5">
         <div className="text-center">
           <div className="inline-block p-[2px] rounded-[200px] btn_animate">
             <button className="bg-[#12181A] font-normal py-3 px-4  text-sm sm:text-base text-white rounded-[200px]">

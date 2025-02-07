@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CourseForm from "../components/common/CourseForm";
-import DashboardNavBar from "../components/DashboardNavBar";
 
 const EditCourse = () => {
   const { id } = useParams(); // Get course ID from URL
