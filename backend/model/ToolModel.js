@@ -10,7 +10,7 @@ const ToolSchema = new mongoose.Schema(
     link: { type: String, required: true },
     extraNotes: { type: String },
     source: { type: String },
-    imageUrl: { type: String, required: true },
+    imageUrl: { type: String},
   },
   { timestamps: true }
 );

@@ -23,8 +23,15 @@ export default function CourseCard({
           className="w-full object-cover h-60 rounded-[20px] group-hover:scale-[1.1] transition-all"
         />
       </div>
-      <div className="text-white">
-        <h3 className="text-sm sm:text-base leading-[20.83px] font-medium mt-4 sm:mt-6">
+      <div className="text-white flex flex-col justify-between">
+        <div>
+        <h3 className="text-sm sm:text-base leading-[20.83px] font-medium mt-4 sm:mt-6"  style={{
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 1,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}>
           {title}
         </h3>
         <p
@@ -39,6 +46,7 @@ export default function CourseCard({
         >
           {description}
         </p>
+        </div>
 
         <div className="flex justify-between items-center mt-4 sm:mt-6">
           <div className="flex flex-col gap-2">

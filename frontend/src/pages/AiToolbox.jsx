@@ -12,7 +12,7 @@ const AiToolbox = () => {
   const [category, setCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const [openDropdown, setOpenDropdown] = useState(null);
+  // const [openDropdown, setOpenDropdown] = useState(null);
 
   const [subCatgeory, setSubCatgeory] = useState([]);
   const [selectedSubCatgeory, setSelectedSubCatgeory] = useState("");
@@ -76,26 +76,48 @@ const AiToolbox = () => {
     return () => clearTimeout(delayDebounce);
   }, [currentPage, getCourse, searchTerm]);
 
-  const toggleDropdownCategory = (item) => {
-    setOpenDropdown(openDropdown === item ? null : item);
-  };
+  // const toggleDropdownCategory = (item) => {
+  //   setOpenDropdown(openDropdown === item ? null : item);
+  // };
 
   const handlePageChange = (page) => {
     if (page < 1 || page > totalPages) return; // Prevent invalid page changes
     setCurrentPage(page); // Set the current page
   };
 
-  const handleCategorySelect = (selected) => {
+  // const handleCategorySelect = (selected) => {
+  //   setSelectedSubCatgeory("");
+  //   setSearchTerm("");
+  //   setSelectedCategory(selected);
+  //   setOpenDropdown(null);
+  //   setCurrentPage(1);
+  // };
+  // const handleSubcatgeorySelect = (selected) => {
+  //   setSelectedCategory("");
+  //   setSearchTerm("");
+  //   setSelectedSubCatgeory(selected);
+  //   setOpenDropdown(null);
+  //   setCurrentPage(1);
+  // };
+
+  const handleCategoryChange = (event) => {
     setSelectedSubCatgeory("");
-    setSelectedCategory(selected);
-    setOpenDropdown(null);
-    setCurrentPage(1);
+    setSearchTerm("");
+    const value = event.target.value;
+    setSelectedCategory(value);
   };
-  const handleSubcatgeorySelect = (selected) => {
+
+  const handleSubCategoryChange = (event) => {
     setSelectedCategory("");
-    setSelectedSubCatgeory(selected);
-    setOpenDropdown(null);
-    setCurrentPage(1);
+    setSearchTerm("");
+    const value = event.target.value;
+    setSelectedSubCatgeory(value);
+  };
+
+  const resetFilters = () => {
+    setSelectedCategory("");
+    setSelectedSubCatgeory("");
+    setSearchTerm("");
   };
 
   return (
@@ -149,109 +171,60 @@ const AiToolbox = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => {
+                setSelectedCategory("");
+                setSelectedSubCatgeory("");
                 setSearchTerm(e.target.value);
               }}
             />
           </div>
           <div className="flex flex-wrap justify-center gap-3">
-            <div className="relative">
-              <div
-                onClick={() => toggleDropdownCategory("Category")}
-                className="flex bg-[#12181A] rounded-full border border-white border-opacity-10 py-2 px-4 items-center cursor-pointer"
+            {/* Category Dropdown */}
+            <div>
+              <select
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-48"
               >
-                <p className="text-white">Category</p>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`transition-transform ${
-                    openDropdown === "Category" ? "rotate-180" : ""
-                  }`}
-                >
-                  <path
-                    d="M13.2292 7.5001L9.99583 10.7334L6.7625 7.5001C6.4375 7.1751 5.9125 7.1751 5.5875 7.5001C5.2625 7.8251 5.2625 8.3501 5.5875 8.6751L9.4125 12.5001C9.7375 12.8251 10.2625 12.8251 10.5875 12.5001L14.4125 8.6751C14.7375 8.3501 14.7375 7.8251 14.4125 7.5001C14.0875 7.18343 13.5542 7.1751 13.2292 7.5001Z"
-                    fill="white"
-                  />
-                </svg>
-              </div>
-
-              {openDropdown === "Category" && (
-                <div className="absolute left-0 mt-2 w-40 bg-[#1E2528] text-white rounded-lg shadow-lg z-10">
-                  <ul
-                    className="py-2 h-40 overflow-y-auto overflow-x-hidden scroll-smooth"
-                    style={{
-                      scrollbarWidth: "thin",
-                    }}
-                  >
-                    {category.length > 0 ? (
-                      category.map((data) => (
-                        <li
-                          key={data._id}
-                          className="px-4 py-2 hover:bg-[#2A3336] cursor-pointer"
-                          onClick={() => handleCategorySelect(data)}
-                        >
-                          {data}{" "}
-                        </li>
-                      ))
-                    ) : (
-                      <li className="px-4 py-2 text-gray-400">No Categories</li>
-                    )}
-                  </ul>
-                </div>
-              )}
+                <option value="">Select Category</option>
+                {category.length > 0 ? (
+                  category.map((data) => (
+                    <option key={data._id} value={data}>
+                      {data}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>No Categories</option>
+                )}
+              </select>
             </div>
-            <div className="relative">
-              <div
-                onClick={() => toggleDropdownCategory("SubCategory")}
-                className="flex bg-[#12181A] rounded-full border border-white border-opacity-10 py-2 px-4 items-center cursor-pointer"
+
+            {/* SubCategory Dropdown */}
+            <div>
+              <select
+                value={selectedSubCatgeory}
+                onChange={handleSubCategoryChange}
+                className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-48"
               >
-                <p className="text-white">Sub Category</p>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`transition-transform ${
-                    openDropdown === "SubCategory" ? "rotate-180" : ""
-                  }`}
-                >
-                  <path
-                    d="M13.2292 7.5001L9.99583 10.7334L6.7625 7.5001C6.4375 7.1751 5.9125 7.1751 5.5875 7.5001C5.2625 7.8251 5.2625 8.3501 5.5875 8.6751L9.4125 12.5001C9.7375 12.8251 10.2625 12.8251 10.5875 12.5001L14.4125 8.6751C14.7375 8.3501 14.7375 7.8251 14.4125 7.5001C14.0875 7.18343 13.5542 7.1751 13.2292 7.5001Z"
-                    fill="white"
-                  />
-                </svg>
-              </div>
-
-              {openDropdown === "SubCategory" && (
-                <div className="absolute left-0 mt-2 w-48 bg-[#1E2528] text-white rounded-lg shadow-lg z-10">
-                  <ul
-                    className="py-2 h-40 overflow-y-auto overflow-x-hidden scroll-smooth"
-                    style={{
-                      scrollbarWidth: "thin",
-                    }}
-                  >
-                    {subCatgeory.length > 0 ? (
-                      subCatgeory?.map((data) => (
-                        <li
-                          key={data._id}
-                          className="px-4 py-2 hover:bg-[#2A3336] cursor-pointer"
-                          onClick={() => handleSubcatgeorySelect(data)}
-                        >
-                          {data}{" "}
-                        </li>
-                      ))
-                    ) : (
-                      <li className="px-4 py-2 text-gray-400">
-                        No SubCategory
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              )}
+                <option value="">Select SubCategory</option>
+                {subCatgeory.length > 0 ? (
+                  subCatgeory.map((data) => (
+                    <option key={data._id} value={data}>
+                      {data}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>No SubCategories</option>
+                )}
+              </select>
             </div>
+
+            {/* Reset Button */}
+            <button
+              onClick={resetFilters}
+              className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition"
+            >
+              Reset
+            </button>
           </div>
         </div>
 

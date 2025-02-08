@@ -98,15 +98,6 @@ const FormBox = () => {
             </button>
           </div>
 
-          <div className="text-right pb-10">
-            <a
-              href="#"
-              className="text-[#FF0000] font-light text-lg hover:underline"
-            >
-              Forgot Password?
-            </a>
-          </div>
-
           <motion.button
             className="w-full py-[21px] join_btn rounded-full text-lg !leading-[14px] font-semibold "
             type="submit"

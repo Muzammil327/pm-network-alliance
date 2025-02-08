@@ -105,7 +105,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 my-10 mx-80">
+    <form onSubmit={handleSubmit} className="space-y-4 my-10 lg:mx-80 md:mx-60 sm:mx-20 mx-10">
       <div>
         <label className="block text-sm mb-2 font-medium text-gray-100">
           Platform

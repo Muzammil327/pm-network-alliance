@@ -52,10 +52,9 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
   };
 
   const handleDeleteImage = async (imageUrl: string) => {
-
     try {
       const response = await axios.delete(
-        "https://backend.pmnetworkalliance.com/api/delete-image", {
+        "https://backend.pmnetworkalliance.com/api/tools/delete-image", {
           data: { imageUrl },
         }
       );
@@ -128,7 +127,7 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
   const refreshImageUrl = (url: string) => `${url}?t=${Date.now()}`;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 my-10 mx-80">
+    <form onSubmit={handleSubmit} className="space-y-4 my-10 lg:mx-80 md:mx-60 sm:mx-20 mx-10">
       <div>
         <label className="block text-sm mb-2 font-medium text-gray-100">
           Tool Name

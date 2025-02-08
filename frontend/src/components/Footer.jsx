@@ -54,7 +54,7 @@ const Footer = () => {
         <div className="!border-[0.1px] bg-gradient-to-b from-[#0B0F0E] mt-[48px] via-[#263531] to-[#0B0F0E] opacity-[5%]"></div>
 
         <p className="text-center mt-[48px] font-normal text-[12px] leading-[16px] tracking-[0.26px] text-white">
-          Design with love © TanahAirStudio 2020. All right reserved
+        All rights reserved PM Network Aliance 2025
         </p>
       </div>
     </div>

@@ -36,7 +36,6 @@ export default function ToolCard({
             overflow: "hidden",
             textOverflow: "ellipsis",
           }}
-          // className="text-xs sm:text-sm mt-2 leading-[18.23px] text-[#778A8F] font-normal"
           className="text-sm mt-2 text-[#778A8F]"
         >
           {description}
@@ -54,12 +53,11 @@ export default function ToolCard({
             >
               <TiDelete size={20} />
             </button>
-            <button
-              className="flex items-center justify-center p-2 border-2 border-[#00CCFF] text-white rounded-lg hover:border-transparent hover:bg-[#00CCFF] transition-all"
-              onClick={updateCourse}
-            >
-              <GrUpdate size={18} />
-            </button>
+            <a href={updateCourse}>
+              <button className="flex items-center justify-center p-2 border-2 border-[#00CCFF] text-white rounded-lg hover:border-transparent hover:bg-[#00CCFF] transition-all">
+                <GrUpdate size={18} />
+              </button>
+            </a>
           </div>
         )}
 

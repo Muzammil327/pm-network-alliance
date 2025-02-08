@@ -12,7 +12,7 @@ const Course = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://backend.pmnetworkalliance.com/api/tools/get?page=${currentPage}&limit=9`
+        `https://backend.pmnetworkalliance.com/api/tools/get?page=${currentPage}&limit=12`
       );
       setCoursesData(response.data.tools);
       setTotalPages(response.data.totalPages); // Set total pages from the response

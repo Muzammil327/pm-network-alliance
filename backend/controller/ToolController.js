@@ -76,11 +76,10 @@ const GetTool = async (req, res) => {
       ];
     }
 
-    const tools = await Tool.find().skip(skip).limit(limit);
-
-    const totalTools = await Tool.countDocuments();
-
+    const tools = await Tool.find(filter).skip(skip).limit(limit);
+    const totalTools = await Tool.countDocuments(filter);
     const totalPages = Math.ceil(totalTools / limit);
+
     res.json({
       tools,
       currentPage: page,
@@ -114,8 +113,8 @@ const UpdateTool = async (req, res) => {
       console.error("Formidable error:", err);
       return res.status(400).send("Error parsing the form.");
     }
-
     try {
+      
       const toolName = fields.toolName[0];
       const category = fields.category[0];
       const subcategory = fields.subcategory[0];
@@ -123,7 +122,13 @@ const UpdateTool = async (req, res) => {
       const shortDescription = fields.shortDescription[0];
       const keyFeatures = fields.keyFeatures[0];
       const extraNotes = fields.extraNotes[0];
-      const image = fields.image[0];
+      let image;
+
+      if(fields.image) {
+        image = files.image[0].path;
+      } else {
+        image = "";
+      }
 
       // Check if the tool exists
       const tool = await Tool.findById(req.params.id);
@@ -132,16 +137,23 @@ const UpdateTool = async (req, res) => {
       }
 
       // If a new image is provided, upload it to Cloudinary
-      let imageUrl = tool.imageUrl || image;
-      if (files.imageFile) {
-        const uploadResponse = await cloudinary.uploader.upload(
-          files.imageFile[0].filepath,
-          {
-            folder: "tools/images",
-          }
-        );
-        imageUrl = uploadResponse.secure_url;
+      let imageUrl;
+      if (files?.image?.[0]) {
+        try {
+          const uploadResponse = await cloudinary.uploader.upload(
+            files.image[0].filepath,
+            {
+              folder: "tools/images",
+            }
+          );
+          imageUrl = uploadResponse.secure_url;
+        } catch (error) {
+          console.error("Cloudinary upload failed:", error);
+        }
+      } else {
+        imageUrl = ""; // Or any default value if needed
       }
+      
 
       // Update the tool with new data
       tool.toolName = toolName || tool.toolName;
@@ -150,8 +162,8 @@ const UpdateTool = async (req, res) => {
       tool.link = link || tool.link;
       tool.shortDescription = shortDescription || tool.shortDescription;
       tool.extraNotes = extraNotes || tool.extraNotes;
-      tool.keyFeatures = keyFeatures || tool.keyFeatures; // Replaced keyPoints
-      tool.imageUrl = imageUrl;
+      tool.keyFeatures = keyFeatures || tool.keyFeatures;
+      tool.imageUrl = imageUrl || image; 
 
       await tool.save();
       res.json(tool);
@@ -225,6 +237,10 @@ const DeleteToolImage = async (req, res) => {
         if (response.result !== "ok") {
             return res.status(400).json({ message: "Failed to delete image" });
         }
+        await Tool.updateOne(
+          { "imageUrl": imageUrl },
+          { $set: { "imageUrl": null } }
+        );  
   
         res.status(200).json({ message: "Image deleted successfully" });
     } catch (error) {
@@ -236,4 +252,4 @@ const DeleteToolImage = async (req, res) => {
 
 
 
-export { CreateTool, GetTool, SingleTool, UpdateTool, DeleteTool, GetToolSubCatgeory, GetToolCatgeory };
+export { CreateTool, GetTool, SingleTool, UpdateTool, DeleteTool, GetToolSubCatgeory, GetToolCatgeory, DeleteToolImage };
