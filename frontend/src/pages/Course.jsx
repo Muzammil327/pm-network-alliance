@@ -1,50 +1,7 @@
-import axios from "axios";
-import React, { useCallback, useEffect, useState } from "react";
-import CourseCard from "../components/common/CourseCard";
+import React from "react";
+import GetCourse from "../components/common/GetCourse";
 
 const Course = () => {
-  const [coursesData, setCoursesData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false);
-
-  const getCourse = useCallback( async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://backend.pmnetworkalliance.com/api/courses/get?page=${currentPage}&limit=6`
-      );
-      setCoursesData(response.data.courses);
-      setTotalPages(response.data.totalPages); // Set total pages from the response
-      setLoading(false);
-    } catch (error) {
-      console.error(error.message);
-      setLoading(false);
-    }
-  }, [currentPage]);
-
-  useEffect(() => {
-    getCourse();
-  }, [currentPage, getCourse]);
-
-  const deleteCourse = async (id) => {
-    try {
-      const response = await axios.delete(
-        `https://backend.pmnetworkalliance.com/api/courses/delete/${id}`
-      );
-      console.log("Course deleted:", response.data);
-      getCourse(); // Re-fetch courses after deletion
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
-  // Handle page change
-  const handlePageChange = (page) => {
-    if (page < 1 || page > totalPages) return; // Prevent invalid page changes
-    setCurrentPage(page); // Set the current page
-  };
-
   return (
     <React.Fragment>
       <div className="custom_container px-4 sm:px-6 lg:px-8">
@@ -69,49 +26,7 @@ const Course = () => {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
-            {loading ? (
-              <p>Loading...</p> // Show loading state
-            ) : (
-              coursesData.map((course) => (
-                <CourseCard
-                  key={course._id}
-                  title={course.courseTitle}
-                  description={course.keyPoints}
-                  duration={course.duration}
-                  link={course?.link}
-                  image={course.imageUrl}
-                  categoryFocus={course.categoryFocus}
-                  filter="admin"
-                  deleteCourse={() => deleteCourse(course._id)}
-                  updateCourse={`/dashboard/courses/edit/${course._id}`}
-                />
-              ))
-            )}
-          </div>
-
-          {/* Pagination controls */}
-          <div className="text-center pb-10 mt-8">
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage <= 1}
-                className="py-3 px-6 rounded-[200px] bg-[#12181A] text-white"
-              >
-                Previous
-              </button>
-              <span className="py-3 px-6 rounded-[200px] text-white">
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage >= totalPages}
-                className="py-3 px-6 rounded-[200px] bg-[#12181A] text-white"
-              >
-                Next
-              </button>
-            </div>
-          </div>
+         <GetCourse filter="admin"/>
         </section>
       </div>
     </React.Fragment>

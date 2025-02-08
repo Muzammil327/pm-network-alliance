@@ -76,7 +76,10 @@ const GetTool = async (req, res) => {
       ];
     }
 
-    const tools = await Tool.find(filter).skip(skip).limit(limit);
+    const tools = await Tool.find(filter)
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
     const totalTools = await Tool.countDocuments(filter);
     const totalPages = Math.ceil(totalTools / limit);
 

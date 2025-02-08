@@ -71,7 +71,10 @@ const GetCourse = async (req, res) => {
       ];
     }
 
-    const courses = await Course.find(filter).skip(skip).limit(limit);
+    const courses = await Course.find(filter)
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
     const totalCourses = await Course.countDocuments(filter); // Count filtered courses
     const totalPages = Math.ceil(totalCourses / limit);
 
@@ -240,7 +243,6 @@ const DeleteCourseImage = async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 }
-
 
 export {
   CreateCourse,

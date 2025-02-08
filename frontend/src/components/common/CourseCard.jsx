@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { TiDelete } from "react-icons/ti";
 import { GrUpdate } from "react-icons/gr";
 
@@ -14,6 +14,8 @@ export default function CourseCard({
   deleteCourse,
   updateCourse,
 }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="bg-[#12181A] rounded-[20px] shadow-lg p-4 border border-[#313B3D] group cursor-pointer hover:border-[#00CCFF] transition-all">
       <div className="overflow-hidden rounded-[20px]">
@@ -25,27 +27,30 @@ export default function CourseCard({
       </div>
       <div className="text-white flex flex-col justify-between justify-self-end">
         <div>
-        <h3 className="text-sm sm:text-base leading-[20.83px] font-medium mt-4 sm:mt-6"  style={{
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 1,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}>
-          {title}
-        </h3>
-        <p
-          style={{
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 3,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-          className="text-xs sm:text-sm mt-2 leading-[18.23px] text-[#778A8F] font-normal"
-        >
-          {description}
-        </p>
+          <h3
+            className="text-sm sm:text-base leading-[20.83px] font-medium mt-4 sm:mt-6"
+            style={{
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 1,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {title}
+          </h3>
+          <p
+            style={{
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            className="text-xs sm:text-sm mt-2 leading-[18.23px] text-[#778A8F] font-normal"
+          >
+            {description}
+          </p>
         </div>
 
         <div className="flex justify-between items-center mt-4 sm:mt-6">
@@ -67,7 +72,7 @@ export default function CourseCard({
                 {duration}
               </span>
             </div>
-            {filter === "admin" && (
+            {filter === "user" && (
               <div className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +136,7 @@ export default function CourseCard({
             <div className="flex gap-3">
               <button
                 className="px-2 py-2 border-2 font-semibold text-base sm:text-sm border-[#00CCFF] text-white rounded-[10px] hover:border-transparent hover:bg-[#00CCFF] transition-all"
-                onClick={deleteCourse}
+                onClick={() => setIsModalOpen(true)}
               >
                 <TiDelete size={28} />{" "}
               </button>
@@ -153,6 +158,34 @@ export default function CourseCard({
           )}
         </div>
       </div>
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-[#1E2A30] text-white p-6 rounded-lg shadow-lg w-80">
+            <h2 className="text-xl font-semibold">Confirm Deletion</h2>
+            <p className="text-sm mt-2 text-[#B0BEC5]">
+              Are you sure you want to delete this course? This action cannot be
+              undone.
+            </p>
+            <div className="flex justify-end mt-4 gap-3">
+              <button
+                className="px-4 py-2 text-sm bg-gray-600 rounded-lg hover:bg-gray-700 transition-all"
+                onClick={() => setIsModalOpen(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 text-sm bg-red-600 rounded-lg hover:bg-red-700 transition-all"
+                onClick={() => {
+                  deleteCourse();
+                  setIsModalOpen(false);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
