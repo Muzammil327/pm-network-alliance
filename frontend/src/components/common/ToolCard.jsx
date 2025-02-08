@@ -41,7 +41,7 @@ export default function ToolCard({
           {description}
         </p>
       </div>
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-4 justify-self-end">
         <span className="text-sm text-[#778A8F]">{category}</span>
 
         {/* Admin Buttons - Positioned Correctly */}

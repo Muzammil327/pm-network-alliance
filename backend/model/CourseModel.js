@@ -8,7 +8,7 @@ const CourseSchema = new mongoose.Schema(
     keyPoints: { type: String, required: true },
     link: { type: String, required: true },
     duration: { type: String, default: "N/A" },
-    imageUrl: { type: String, required: true },
+    imageUrl: { type: String },
   },
   { timestamps: true }
 );

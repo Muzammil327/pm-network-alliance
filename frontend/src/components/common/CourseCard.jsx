@@ -23,7 +23,7 @@ export default function CourseCard({
           className="w-full object-cover h-60 rounded-[20px] group-hover:scale-[1.1] transition-all"
         />
       </div>
-      <div className="text-white flex flex-col justify-between">
+      <div className="text-white flex flex-col justify-between justify-self-end">
         <div>
         <h3 className="text-sm sm:text-base leading-[20.83px] font-medium mt-4 sm:mt-6"  style={{
             display: "-webkit-box",
