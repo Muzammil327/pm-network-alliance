@@ -118,8 +118,8 @@ const GetTools = ({filter}) => {
   return (
     <section>
       <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
-        <div className="bg-[#12181A] border w-full max-w-sm md:w-80 flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
-          <input
+      <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-80 flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
+      <input
             className="bg-transparent outline-none text-white flex-1"
             placeholder="Search tools..."
             type="text"
@@ -131,9 +131,10 @@ const GetTools = ({filter}) => {
             }}
           />
         </div>
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full md:w-auto">
           {/* Category Dropdown */}
-          <div>
+          <div className="w-full sm:w-48">
+
             <select
               value={selectedCategory}
               onChange={handleCategoryChange}
@@ -153,7 +154,7 @@ const GetTools = ({filter}) => {
           </div>
 
           {/* SubCategory Dropdown */}
-          <div>
+          <div className="w-full sm:w-48">
             <select
               value={selectedSubCatgeory}
               onChange={handleSubCategoryChange}
@@ -175,7 +176,7 @@ const GetTools = ({filter}) => {
           {/* Reset Button */}
           <button
             onClick={resetFilters}
-            className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition"
+            className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition w-full sm:w-auto"
           >
             Reset
           </button>

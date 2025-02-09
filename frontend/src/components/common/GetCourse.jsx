@@ -114,7 +114,8 @@ const GetCourse = ({ filter }) => {
   return (
     <section>
       <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
-        <div className="bg-[#12181A] border w-full max-w-sm md:w-80 flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
+        {/* Search Input */}
+        <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-80 flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
           <input
             className="bg-transparent outline-none text-white flex-1"
             placeholder="Search tools..."
@@ -127,9 +128,11 @@ const GetCourse = ({ filter }) => {
             }}
           />
         </div>
-        <div className="flex flex-wrap justify-center gap-3">
+
+        {/* Filters & Reset */}
+        <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full md:w-auto">
           {/* Category Dropdown */}
-          <div>
+          <div className="w-full sm:w-48">
             <select
               value={selectedCategory}
               onChange={handleCategoryChange}
@@ -149,11 +152,11 @@ const GetCourse = ({ filter }) => {
           </div>
 
           {/* Platform Dropdown */}
-          <div>
+          <div className="w-full sm:w-48">
             <select
               value={selectedPlatform}
               onChange={handlePlatformChange}
-              className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-48"
+              className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
             >
               <option value="">Select Platform</option>
               {platform.length > 0 ? (
@@ -163,7 +166,7 @@ const GetCourse = ({ filter }) => {
                   </option>
                 ))
               ) : (
-                <option disabled>No SubCategories</option>
+                <option disabled>No Platforms</option>
               )}
             </select>
           </div>
@@ -171,7 +174,7 @@ const GetCourse = ({ filter }) => {
           {/* Reset Button */}
           <button
             onClick={resetFilters}
-            className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition"
+            className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition w-full sm:w-auto"
           >
             Reset
           </button>
