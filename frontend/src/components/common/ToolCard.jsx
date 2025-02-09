@@ -21,7 +21,7 @@ export default function ToolCard({
         <div className="flex justify-between items-start">
           <img src={image} alt={title} className="w-10 h-10" />
           {/* Replace SVG with a div placeholder for future action */}
-          <div className="opacity-50">
+          <div className="opacity-50 z-10">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
                 d="M9.29611 5.70386C9.29611 6.26386 9.74611 6.70386 10.2961 6.70386H15.8861L4.99611 17.5939C4.60611 17.9839 4.60611 18.6139 4.99611 19.0039C5.38611 19.3939 6.01611 19.3939 6.40611 19.0039L17.2961 8.11386V13.7039C17.2961 14.2539 17.7461 14.7039 18.2961 14.7039C18.8461 14.7039 19.2961 14.2539 19.2961 13.7039V5.70386C19.2961 5.15386 18.8461 4.70386 18.2961 4.70386H10.2961C9.74611 4.70386 9.29611 5.15386 9.29611 5.70386Z"
@@ -44,7 +44,7 @@ export default function ToolCard({
           {description}
         </p>
       </div>
-      <div className="flex justify-between items-center mt-4 justify-self-end">
+      <div className="flex justify-between items-center mt-4">
         <span className="text-sm text-[#778A8F]">{category}</span>
 
         {/* Admin Buttons - Positioned Correctly */}
@@ -74,8 +74,8 @@ export default function ToolCard({
         )}
       </div>
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-[#1E2A30] text-white p-6 rounded-lg shadow-lg w-80">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-40">
+          <div className="bg-[#1E2A30] text-white p-6 rounded-lg shadow-lg md:w-96">
             <h2 className="text-xl font-semibold">Confirm Deletion</h2>
             <p className="text-sm mt-2 text-[#B0BEC5]">
               Are you sure you want to delete this tool? This action cannot be
@@ -90,10 +90,7 @@ export default function ToolCard({
               </button>
               <button
                 className="px-4 py-2 text-sm bg-red-600 rounded-lg hover:bg-red-700 transition-all"
-                onClick={() => {
-                  deleteCourse();
-                  setIsModalOpen(false);
-                }}
+                onClick={deleteCourse}
               >
                 Delete
               </button>

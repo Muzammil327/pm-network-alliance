@@ -18,13 +18,19 @@ const CreateCourse = async (req, res) => {
       const link = fields.link[0];
       const duration = fields.duration[0];
       const description = fields.description[0];
-      // Upload image to Cloudinary
-      const uploadResponse = await cloudinary.uploader.upload(
-        files.image[0].filepath,
-        {
-          folder: "courses/images",
-        }
-      );
+
+      let image;
+      if (files.image) {
+        const uploadResponse = await cloudinary.uploader.upload(
+          files.image[0].filepath,
+          {
+            folder: "courses/images",
+          }
+        );
+        image = uploadResponse.secure_url;
+      } else {
+        image = "";
+      }
 
       // Create course with uploaded image URL
       const newCourse = new Course({
@@ -34,7 +40,7 @@ const CreateCourse = async (req, res) => {
         keyPoints: description,
         link,
         duration,
-        imageUrl: uploadResponse.secure_url, // Cloudinary URL
+        imageUrl: image,
       });
 
       await newCourse.save();
@@ -66,15 +72,15 @@ const GetCourse = async (req, res) => {
     }
     if (searchTerm) {
       filter.$or = [
-        { courseTitle: { $regex: searchTerm, $options: 'i' } },
-        { keyPoints: { $regex: searchTerm, $options: 'i' } },
+        { courseTitle: { $regex: searchTerm, $options: "i" } },
+        { keyPoints: { $regex: searchTerm, $options: "i" } },
       ];
     }
 
     const courses = await Course.find(filter)
-    .sort({ createdAt: -1 })
-    .skip(skip)
-    .limit(limit);
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
     const totalCourses = await Course.countDocuments(filter); // Count filtered courses
     const totalPages = Math.ceil(totalCourses / limit);
 
@@ -121,11 +127,12 @@ const UpdateCourse = async (req, res) => {
       const description = fields.description?.[0]; // Updated from keyPoints
       let image;
 
-      if(fields.image) {
+      if (fields.image) {
         image = files.image[0].path;
       } else {
         image = "";
       }
+
       // Check if the course exists
       const course = await Course.findById(req.params.id);
       if (!course) {
@@ -133,23 +140,22 @@ const UpdateCourse = async (req, res) => {
       }
 
       // If a new image is provided, upload it to Cloudinary
-       let imageUrl;
-           if (files?.image?.[0]) {
-             try {
-               const uploadResponse = await cloudinary.uploader.upload(
-                 files.image[0].filepath,
-                 {
-                   folder: "tools/images",
-                 }
-               );
-               imageUrl = uploadResponse.secure_url;
-             } catch (error) {
-               console.error("Cloudinary upload failed:", error);
-             }
-           } else {
-             imageUrl = ""; // Or any default value if needed
-           }
-           
+      let imageUrl;
+      if (files?.image?.[0]) {
+        try {
+          const uploadResponse = await cloudinary.uploader.upload(
+            files.image[0].filepath,
+            {
+              folder: "courses/images",
+            }
+          );
+          imageUrl = uploadResponse.secure_url;
+        } catch (error) {
+          console.error("Cloudinary upload failed:", error);
+        }
+      } else {
+        imageUrl = ""; // Or any default value if needed
+      }
 
       // Update the course with new data
       course.platform = platform || course.platform;
@@ -158,7 +164,7 @@ const UpdateCourse = async (req, res) => {
       course.link = link || course.link;
       course.duration = duration || course.duration;
       course.description = description || course.description; // Replaced keyPoints
-      course.imageUrl = imageUrl || image; 
+      course.imageUrl = imageUrl || image;
 
       await course.save();
       res.json(course);
@@ -177,9 +183,11 @@ const DeleteCourse = async (req, res) => {
     }
 
     // Optionally, delete the image from Cloudinary
-    await cloudinary.uploader.destroy(course.imageUrl, {
-      folder: "courses/images", // Make sure this matches the folder used during upload
-    });
+    if(course.imageUrl){
+      await cloudinary.uploader.destroy(course.imageUrl, {
+        folder: "courses/images", // Make sure this matches the folder used during upload
+      });
+    }
 
     await course.deleteOne();
     res.json({ message: "Course deleted" });
@@ -211,38 +219,38 @@ const GetCourseCatgeory = async (req, res) => {
 
 const DeleteCourseImage = async (req, res) => {
   try {
-        const { imageUrl } = req.body;
-        console.log("imageUrl:", imageUrl);
-  
-        if (!imageUrl) {
-            return res.status(400).json({ message: "No image URL provided" });
-        }
-  
-        // Extracting public_id correctly
-        const parts = imageUrl.split("/");
-        const filenameWithVersion = parts[parts.length - 1]; // "v1738850006/gqyin1txuznh4r4yrwtm.png"
-        const filename = filenameWithVersion.split(".")[0];  // "gqyin1txuznh4r4yrwtm"
-  
-        console.log("Correct public_id:", filename);
-  
-        // Delete the image from Cloudinary
-        const response = await cloudinary.uploader.destroy(filename);
-        console.log("Cloudinary response:", response);
-  
-        if (response.result !== "ok") {
-            return res.status(400).json({ message: "Failed to delete image" });
-        }
-        await Course.updateOne(
-          { "imageUrl": imageUrl },
-          { $set: { "imageUrl": null } }
-        );  
-  
-        res.status(200).json({ message: "Image deleted successfully" });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server Error" });
+    const { imageUrl } = req.body;
+    console.log("imageUrl:", imageUrl);
+
+    if (!imageUrl) {
+      return res.status(400).json({ message: "No image URL provided" });
     }
-}
+
+    // Extracting public_id correctly
+    const parts = imageUrl.split("/");
+    const filenameWithVersion = parts[parts.length - 1]; // "v1738850006/gqyin1txuznh4r4yrwtm.png"
+    const filename = filenameWithVersion.split(".")[0]; // "gqyin1txuznh4r4yrwtm"
+
+    console.log("Correct public_id:", filename);
+
+    // Delete the image from Cloudinary
+    const response = await cloudinary.uploader.destroy(filename);
+    console.log("Cloudinary response:", response);
+
+    if (response.result !== "ok") {
+      return res.status(400).json({ message: "Failed to delete image" });
+    }
+    await Course.updateOne(
+      { imageUrl: imageUrl },
+      { $set: { imageUrl: null } }
+    );
+
+    res.status(200).json({ message: "Image deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
 
 export {
   CreateCourse,

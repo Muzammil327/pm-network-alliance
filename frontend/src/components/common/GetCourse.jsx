@@ -3,7 +3,7 @@ import axios from "axios";
 import CourseCard from "./CourseCard";
 import PropTypes from "prop-types";
 
-const GetCourse = ({filter}) => {
+const GetCourse = ({ filter }) => {
   const [coursesData, setCoursesData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -58,6 +58,18 @@ const GetCourse = ({filter}) => {
       setLoading(false);
     }
   }, [currentPage, selectedCategory, selectedPlatform, searchTerm]);
+
+  const deleteCourse = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://backend.pmnetworkalliance.com/api/courses/delete/${id}`
+      );
+      console.log("Course deleted:", response.data);
+      getCourse(); // Re-fetch courses after deletion
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   useEffect(() => {
     if (!searchTerm) {
@@ -173,7 +185,7 @@ const GetCourse = ({filter}) => {
           coursesData &&
           coursesData?.map((course) => (
             <CourseCard
-              key={course.id}
+              key={course._id}
               title={course.courseTitle}
               description={course.keyPoints}
               duration={course.duration}
@@ -181,6 +193,8 @@ const GetCourse = ({filter}) => {
               image={course.imageUrl}
               categoryFocus={course.categoryFocus}
               filter={filter}
+              deleteCourse={() => deleteCourse(course._id)}
+              updateCourse={`/dashboard/courses/edit/${course._id}`}
             />
           ))
         )}

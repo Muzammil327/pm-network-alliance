@@ -104,7 +104,17 @@ const GetTools = ({filter}) => {
     setSelectedSubCatgeory("");
     setSearchTerm("");
   };
-
+  const deleteCourse = async (id) => {
+    try {
+      const response = await axios.delete(
+        `https://backend.pmnetworkalliance.com/api/tools/delete/${id}`
+      );
+      console.log("Course deleted:", response.data);
+      getCourse();
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
   return (
     <section>
       <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
@@ -187,6 +197,8 @@ const GetTools = ({filter}) => {
               image={card.imageUrl}
               category={card.category}
               filter={filter}
+              deleteCourse={() => deleteCourse(card._id)}
+              updateCourse={`/dashboard/tools/edit/${card._id}`}
             />
           ))
         )}

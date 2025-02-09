@@ -118,6 +118,7 @@ const CourseForm: React.FC<CourseFormProps> = ({
         description: "",
         imageFile: null,
       });
+      window.location.reload();
     } catch (error) {
       setError("Failed to submit course");
       console.error("Error:", error);

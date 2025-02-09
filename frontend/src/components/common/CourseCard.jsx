@@ -25,7 +25,7 @@ export default function CourseCard({
           className="w-full object-cover h-60 rounded-[20px] group-hover:scale-[1.1] transition-all"
         />
       </div>
-      <div className="text-white flex flex-col justify-between justify-self-end">
+      <div className="text-white flex flex-col justify-between">
         <div>
           <h3
             className="text-sm sm:text-base leading-[20.83px] font-medium mt-4 sm:mt-6"
@@ -160,7 +160,7 @@ export default function CourseCard({
       </div>
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-[#1E2A30] text-white p-6 rounded-lg shadow-lg w-80">
+          <div className="bg-[#1E2A30] text-white p-6 rounded-lg shadow-lg md:w-96">
             <h2 className="text-xl font-semibold">Confirm Deletion</h2>
             <p className="text-sm mt-2 text-[#B0BEC5]">
               Are you sure you want to delete this course? This action cannot be
@@ -175,10 +175,7 @@ export default function CourseCard({
               </button>
               <button
                 className="px-4 py-2 text-sm bg-red-600 rounded-lg hover:bg-red-700 transition-all"
-                onClick={() => {
-                  deleteCourse();
-                  setIsModalOpen(false);
-                }}
+                onClick={deleteCourse}
               >
                 Delete
               </button>

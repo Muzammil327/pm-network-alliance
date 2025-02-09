@@ -22,12 +22,13 @@ import DashboardNavBar from "./components/DashboardNavBar";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const hideNavFooter = location.pathname.startsWith("/dashboard") || location.pathname.startsWith("/admin");
+  const hideNavFooter = location.pathname.startsWith("/dashboard");
+  const hideNavFooter2 = location.pathname.startsWith("/admin");
 
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in milliseconds
-      once: true, // Whether animation should happen only once
+      duration: 1000,
+      once: true,
     });
     const token = localStorage.getItem("token");
     if (!token && location.pathname.startsWith("/dashboard")) {
@@ -37,7 +38,7 @@ function App() {
 
   return (
     <>
-      {!hideNavFooter && <NavBar />}
+      {!hideNavFooter && !hideNavFooter2 && <NavBar />}
       {hideNavFooter && <DashboardNavBar />}
       <Routes>
         <Route path="/admin" element={<Login />} />
@@ -53,7 +54,7 @@ function App() {
         <Route path="/dashboard/tools/add" element={<AddTool />} />
         <Route path="/dashboard/tools/edit/:id" element={<EditTool />} />
       </Routes>
-      {!hideNavFooter && <Footer />}
+      {!hideNavFooter && !hideNavFooter2 && <Footer />}
     </>
   );
 }
