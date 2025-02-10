@@ -128,7 +128,7 @@ const UpdateCourse = async (req, res) => {
       let image;
 
       if (fields.image) {
-        image = files.image[0].path;
+        image = fields.image?.[0];
       } else {
         image = "";
       }

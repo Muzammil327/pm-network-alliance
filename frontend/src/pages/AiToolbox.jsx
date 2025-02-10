@@ -17,7 +17,7 @@ const AiToolbox = () => {
           </button>
         </div>
         <h1 className="font-medium text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white my-6 max-w-4xl mx-auto">
-          AI Tools to Boost Efficiency & Automation
+          AI Toolbox to Boost Efficiency & Automation
         </h1>
         <p className="text-white/60 max-w-xl mx-auto text-lg md:text-xl leading-relaxed">
           Boost efficiency, automate repetitive work, and make data-driven

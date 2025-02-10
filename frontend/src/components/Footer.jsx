@@ -23,7 +23,7 @@ const Footer = () => {
                     to={item.path}
                     className={({ isActive }) =>
                       `font-normal text-base md:text-lg  hover:text-white ${
-                        isActive ? "text-white" : "text-white/60"
+                        isActive ? "text-white" : "text-[#999c9c]"
                       }`
                     }
                   >
@@ -51,10 +51,15 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="!border-[0.1px] bg-gradient-to-b from-[#0B0F0E] mt-[48px] via-[#263531] to-[#0B0F0E] opacity-[5%]"></div>
-
-        <p className="text-center mt-[48px] font-normal text-[12px] leading-[16px] tracking-[0.26px] text-white">
-        All rights reserved PM Network Aliance 2025
+        <div
+          className="w-full !my-12"
+          style={{
+            borderTop: "0.5px solid",
+            borderImage: "linear-gradient(to right, white, #778A8F, white) 1",
+          }}
+        ></div>
+        <p className="text-center mt-[48px] font-normal text-[12px]  leading-[16px] tracking-[0.26px] text-white">
+          All rights reserved PM Network Aliance 2025
         </p>
       </div>
     </div>

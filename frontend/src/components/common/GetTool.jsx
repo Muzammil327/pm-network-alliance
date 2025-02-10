@@ -3,7 +3,7 @@ import axios from "axios";
 import ToolCard from "./ToolCard";
 import PropTypes from "prop-types";
 
-const GetTools = ({filter}) => {
+const GetTools = ({ filter }) => {
   const [coursesData, setCoursesData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -118,8 +118,8 @@ const GetTools = ({filter}) => {
   return (
     <section>
       <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
-      <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-80 flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
-      <input
+        <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-80 flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
+          <input
             className="bg-transparent outline-none text-white flex-1"
             placeholder="Search tools..."
             type="text"
@@ -132,54 +132,54 @@ const GetTools = ({filter}) => {
           />
         </div>
         <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full md:w-auto">
-          {/* Category Dropdown */}
-          <div className="w-full sm:w-48">
-
-            <select
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-48"
+          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 w-full">
+            {" "}
+            {/* Category Dropdown */}
+            <div className="w-full">
+              <select
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
+              >
+                <option value="">Select Category</option>
+                {category.length > 0 ? (
+                  category.map((data) => (
+                    <option key={data._id} value={data}>
+                      {data}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>No Categories</option>
+                )}
+              </select>
+            </div>
+            {/* SubCategory Dropdown */}
+            <div className="w-full">
+              <select
+                value={selectedSubCatgeory}
+                onChange={handleSubCategoryChange}
+                className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
+              >
+                <option value="">Select SubCategory</option>
+                {subCatgeory.length > 0 ? (
+                  subCatgeory.map((data) => (
+                    <option key={data._id} value={data}>
+                      {data}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>No SubCategories</option>
+                )}
+              </select>
+            </div>
+            {/* Reset Button */}
+            <button
+              onClick={resetFilters}
+              className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition w-full sm:w-auto"
             >
-              <option value="">Select Category</option>
-              {category.length > 0 ? (
-                category.map((data) => (
-                  <option key={data._id} value={data}>
-                    {data}
-                  </option>
-                ))
-              ) : (
-                <option disabled>No Categories</option>
-              )}
-            </select>
+              Reset
+            </button>
           </div>
-
-          {/* SubCategory Dropdown */}
-          <div className="w-full sm:w-48">
-            <select
-              value={selectedSubCatgeory}
-              onChange={handleSubCategoryChange}
-              className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-48"
-            >
-              <option value="">Select SubCategory</option>
-              {subCatgeory.length > 0 ? (
-                subCatgeory.map((data) => (
-                  <option key={data._id} value={data}>
-                    {data}
-                  </option>
-                ))
-              ) : (
-                <option disabled>No SubCategories</option>
-              )}
-            </select>
-          </div>
-
-          {/* Reset Button */}
-          <button
-            onClick={resetFilters}
-            className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition w-full sm:w-auto"
-          >
-            Reset
-          </button>
         </div>
       </div>
 

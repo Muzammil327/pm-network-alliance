@@ -131,46 +131,46 @@ const GetCourse = ({ filter }) => {
 
         {/* Filters & Reset */}
         <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full md:w-auto">
-          {/* Category Dropdown */}
-          <div className="w-full sm:w-48">
-            <select
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-48"
-            >
-              <option value="">Select Category</option>
-              {category.length > 0 ? (
-                category.map((data) => (
-                  <option key={data._id} value={data}>
-                    {data}
-                  </option>
-                ))
-              ) : (
-                <option disabled>No Categories</option>
-              )}
-            </select>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 w-full">
+            
+            <div className="w-full">
+              <select
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
+              >
+                <option value="">Select Category</option>
+                {category.length > 0 ? (
+                  category.map((data) => (
+                    <option key={data._id} value={data}>
+                      {data}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>No Categories</option>
+                )}
+              </select>
+            </div>
 
-          {/* Platform Dropdown */}
-          <div className="w-full sm:w-48">
-            <select
-              value={selectedPlatform}
-              onChange={handlePlatformChange}
-              className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
-            >
-              <option value="">Select Platform</option>
-              {platform.length > 0 ? (
-                platform.map((data) => (
-                  <option key={data._id} value={data}>
-                    {data}
-                  </option>
-                ))
-              ) : (
-                <option disabled>No Platforms</option>
-              )}
-            </select>
-          </div>
-
+            {/* Platform Dropdown */}
+            <div className="w-full">
+              <select
+                value={selectedPlatform}
+                onChange={handlePlatformChange}
+                className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
+              >
+                <option value="">Select Platform</option>
+                {platform.length > 0 ? (
+                  platform.map((data) => (
+                    <option key={data._id} value={data}>
+                      {data}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>No Platforms</option>
+                )}
+              </select>
+            </div>
           {/* Reset Button */}
           <button
             onClick={resetFilters}
@@ -178,6 +178,8 @@ const GetCourse = ({ filter }) => {
           >
             Reset
           </button>
+          </div>
+
         </div>
       </div>
 

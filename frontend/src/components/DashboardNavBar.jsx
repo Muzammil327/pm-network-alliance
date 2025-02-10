@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/images/png/logo.png";
 
@@ -90,8 +90,8 @@ const DashboardNavBar = () => {
 
         <ul className="flex flex-col gap-8 text-white text-xl">
           {[
-            { name: "Courses", path: "/courses" },
-            { name: "Tools", path: "/tools" },
+              { name: "Courses", path: "/dashboard/courses" },
+              { name: "Tools", path: "/dashboard/tools" },
           ].map((link) => (
             <li className="text-center" key={link.name}>
               <NavLink

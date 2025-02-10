@@ -119,30 +119,33 @@ const UpdateTool = async (req, res) => {
       console.error("Formidable error:", err);
       return res.status(400).send("Error parsing the form.");
     }
+
     try {
-      const toolName = fields.toolName[0];
-      const category = fields.category[0];
-      const subcategory = fields.subcategory[0];
-      const link = fields.link[0];
-      const shortDescription = fields.shortDescription[0];
-      const keyFeatures = fields.keyFeatures[0];
-      const extraNotes = fields.extraNotes[0];
+      const toolName = fields.toolName?.[0];
+      const category = fields.category?.[0];
+      const subcategory = fields.subcategory?.[0];
+      const link = fields.link?.[0];
+      const shortDescription = fields.shortDescription?.[0];
+      const keyFeatures = fields.keyFeatures?.[0];
+      const extraNotes = fields.extraNotes?.[0];
       let image;
 
-      if (fields.image) {
-        image = files.image[0].path;
+      if (fields) {
+        image = files.image?.[0];
       } else {
         image = "";
       }
 
       // Check if the tool exists
       const tool = await Tool.findById(req.params.id);
+    
       if (!tool) {
         return res.status(404).json({ message: "Tool not found" });
       }
 
       // If a new image is provided, upload it to Cloudinary
       let imageUrl;
+      
       if (files?.image?.[0]) {
         try {
           const uploadResponse = await cloudinary.uploader.upload(

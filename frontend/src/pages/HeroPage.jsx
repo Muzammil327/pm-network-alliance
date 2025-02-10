@@ -22,7 +22,6 @@ const useWindowSize = () => {
       const bodyStyles = window.getComputedStyle(document.body);
       setFontSize(bodyStyles.fontSize);
       setLineHeight(bodyStyles.lineHeight);
-
     };
 
     window.addEventListener("resize", handleResize);
@@ -48,15 +47,15 @@ const HeroPage = () => {
             className="w-full lg:w-1/2 text-center lg:text-left relative z-10"
           >
             <h1 className="font-medium text-[36px] sm:text-[48px] lg:text-[75px] 2xl:text-[88px]  text-white tracking-tight !leading-[96px]">
-              Future-Ready Technology Leaders
+              Future-Ready Technology Professionals
             </h1>
             <p className="text-[#778A8F] mt-4 sm:mt-6 font-light text-base sm:text-lg lg:text-xl 2xl:text-2xl">
-              Connect, Learn, and Stay Ahead in Tech Delivery. Join a network of
-              professionals shaping the future of project, program, and product
-              management.
+              Connect, Learn, and Stay Ahead in Tech Delivery <br /> Join a
+              network of professionals shaping the future of project, program,
+              and product management.
             </p>
             <button className="mt-6 sm:mt-8 2xl:mt-[48px] text-lg sm:text-lg font-semibold py-4 px-8 sm:py-5 sm:px-8 rounded-full  !leading-[14px] tracking-[-0.2%] join_btn">
-              Join Now for Free
+              Join Now
             </button>
           </div>
 
@@ -93,9 +92,7 @@ const HeroPage = () => {
               What To Expect
             </h2>
             <p className="mt-4 text-[#778A8F] font-normal text-sm sm:text-[18px] lg:text-[20px] !leading-[26.04px]">
-              Build connections with industry peers, insights from thought
-              leaders and industry experts, practical knowledge to enhance
-              product delivery, and industry news through curated content.
+            Build connections with industry peers, Insights from thought leaders and industry experts, Practical knowledge to enhance product delivery, Industry news and trends through curated content.
             </p>
           </div>
 

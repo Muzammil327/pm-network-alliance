@@ -15,7 +15,7 @@ const FreeCourse = () => {
           </button>
         </div>
         <h1 className="font-medium text-3xl sm:text-5xl md:text-6xl lg:text-[88px] leading-tight text-white my-4 sm:my-6 max-w-[900px] mx-auto">
-          Advance Your Career in a Changing Tech Landscape
+          Upskill in a Changing Tech Landscape
         </h1>
         <p className="text-white/60 max-w-[746px] mx-auto font-light text-base sm:text-xl md:text-2xl leading-7 sm:leading-10">
           Gain practical skills, stay ahead of emerging trends, and enhance your
