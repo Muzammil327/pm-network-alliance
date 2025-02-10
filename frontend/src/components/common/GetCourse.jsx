@@ -113,9 +113,9 @@ const GetCourse = ({ filter }) => {
 
   return (
     <section>
-      <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
-        {/* Search Input */}
-        <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-80 flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
+      <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between lg:gap-20 gap-4">
+      {/* Search Input */}
+        <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-[450px] flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
           <input
             className="bg-transparent outline-none text-white flex-1"
             placeholder="Search tools..."
@@ -130,7 +130,7 @@ const GetCourse = ({ filter }) => {
         </div>
 
         {/* Filters & Reset */}
-        <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full md:w-auto">
+        <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 w-full">
             
             <div className="w-full">

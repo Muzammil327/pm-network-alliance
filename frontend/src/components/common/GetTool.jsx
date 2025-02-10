@@ -117,8 +117,9 @@ const GetTools = ({ filter }) => {
   };
   return (
     <section>
-      <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
-        <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-80 flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
+      <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between lg:gap-20 gap-4">
+      {/* Search Input */}
+        <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-[450px] flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
           <input
             className="bg-transparent outline-none text-white flex-1"
             placeholder="Search tools..."
@@ -131,10 +132,11 @@ const GetTools = ({ filter }) => {
             }}
           />
         </div>
-        <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full md:w-auto">
+
+        {/* Filters & Reset */}
+        <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 w-full">
-            {" "}
-            {/* Category Dropdown */}
+            
             <div className="w-full">
               <select
                 value={selectedCategory}
@@ -153,14 +155,15 @@ const GetTools = ({ filter }) => {
                 )}
               </select>
             </div>
-            {/* SubCategory Dropdown */}
+
+            {/* Platform Dropdown */}
             <div className="w-full">
               <select
                 value={selectedSubCatgeory}
                 onChange={handleSubCategoryChange}
                 className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
               >
-                <option value="">Select SubCategory</option>
+                <option value="">Select Sub Catgeory</option>
                 {subCatgeory.length > 0 ? (
                   subCatgeory.map((data) => (
                     <option key={data._id} value={data}>
@@ -168,18 +171,19 @@ const GetTools = ({ filter }) => {
                     </option>
                   ))
                 ) : (
-                  <option disabled>No SubCategories</option>
+                  <option disabled>No Sub Catgeory</option>
                 )}
               </select>
             </div>
-            {/* Reset Button */}
-            <button
-              onClick={resetFilters}
-              className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition w-full sm:w-auto"
-            >
-              Reset
-            </button>
+          {/* Reset Button */}
+          <button
+            onClick={resetFilters}
+            className="bg-red-600 text-white rounded-full py-2 px-4 hover:bg-red-700 transition w-full sm:w-auto"
+          >
+            Reset
+          </button>
           </div>
+
         </div>
       </div>
 
