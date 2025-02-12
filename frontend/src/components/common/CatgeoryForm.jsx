@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react";
 import useCatgeoryApi from "../../api/useCategoryApi";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-
-const CatgeoryForm = ({
-  existingCatgeory,
-  onSuccess,
-}) => {
-  const {
-    loading,
-    error,
-    createCatgeory,
-    updateCatgeory,
-  } = useCatgeoryApi();
+const CatgeoryForm = ({ existingCatgeory, onSuccess }) => {
+  const { loading, error, createCatgeory, updateCatgeory } = useCatgeoryApi();
   const [formData, setFormData] = useState({
     name: "",
   });
@@ -25,9 +16,7 @@ const CatgeoryForm = ({
     }
   }, [existingCatgeory]);
 
-  const handleChange = (
-    e
-  ) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };

@@ -40,7 +40,11 @@ const usePlatformApi = () => {
     setLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/create`, formData);
-      setPlatforms((prev) => [...prev, response.data]); // Update state with new platform
+      if (response.data) {
+        setPlatforms((prev) => [...prev, response.data]);
+      } else {
+        await getPlatforms();
+      }
     } catch (error) {
       setError(error || "Error creating platform");
     } finally {

@@ -35,11 +35,11 @@ const NewsLetter = () => {
       <section>
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight text-white my-4">
-            What You’ll Get
+            What You’ll Gain
           </h1>
           <p className="text-[#778A8F] font-normal text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            Unlock exclusive resources and insights designed to elevate your
+            project, program, and product management expertise.
           </p>
         </div>
 
@@ -63,7 +63,7 @@ const NewsLetter = () => {
       </section>
 
       {/* Newsletter Highlights */}
-      <section className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32">
+      {/* <section className="py-16 sm:py-20 md:py-24 lg:py-28 xl:py-32">
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight text-white my-4">
             Past Newsletter Highlights
@@ -109,7 +109,7 @@ const NewsLetter = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

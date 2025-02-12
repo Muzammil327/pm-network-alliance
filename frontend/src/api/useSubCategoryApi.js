@@ -40,7 +40,11 @@ const useSubCategoryApi = () => {
     setLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/create`, formData);
-      setSubcatgeorys((prev) => [...prev, response.data]); // Update state with new catgeory
+      if (response.data) {
+        setSubcatgeorys((prev) => [...prev, response.data]);
+      } else {
+        await GetSubCategorys();
+      }
     } catch (error) {
       setError(error || "Error creating subCatgeory");
     } finally {

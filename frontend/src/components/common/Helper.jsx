@@ -269,26 +269,26 @@ export const WhatGet = [
   {
     id: 1,
     img: aiPower,
-    profession: "AI-Powered Tools & Trends",
-    desc: "Stay ahead with the latest AI innovations transforming project management. Get expert insights on tools that enhance productivity and efficiency.",
+    profession: "AI-Powered Insights & Tools",
+    desc: "Stay ahead with cutting-edge AI innovations that are transforming delivery in the tech field. Get expert guidance on automation, analytics, and tools that enhance efficiency and decision-making.",
   },
   {
     id: 2,
     img: fire,
-    profession: "Insider Strategies from Top PMs",
-    desc: "Learn from experienced project managers who share real-world tactics, best practices, and execution frameworks to drive success.",
+    profession: "Exclusive Strategies from Top PM Leaders",
+    desc: "Learn from experienced technology professionals who share real-world tactics, frameworks, and best practices to help you in your field of expertise.",
   },
   {
     id: 3,
     img: date,
-    profession: "Upcoming Virtual Events",
-    desc: "Be the first to know about exclusive webinars, expert panels, and networking opportunities with industry leaders.",
+    profession: "Access to Industry Events & Webinars",
+    desc: "Be the first to know about expert-led webinars, panel discussions, and networking opportunities with top industry leaders focused on AI, Automation and emerging trends related to product and program management.",
   },
   {
     id: 4,
     img: subscriber,
-    profession: "Exclusive Subscriber",
-    desc: "Access premium reports, guides, templates, and AI-driven insights curated specifically for our community of professionals.",
+    profession: "Premium Resources for Members",
+    desc: "Gain access to exclusive reports, templates, frameworks, and AI-powered insights tailored for project managers navigating today’s digital landscape.",
   },
 ];
 
@@ -344,6 +344,7 @@ export const ConnectCard = [
     description:
       "Join the conversation, build connections—your local meet-up awaits.",
     image: connect,
+    link: "https://www.meetup.com/pm-network-alliance/",
   },
   {
     id: 2,
@@ -351,6 +352,7 @@ export const ConnectCard = [
     description:
       "Weekly insights delivered to your inbox—subscribe now and stay connected.",
     image: message,
+    link: "https://www.meetup.com/pm-network-alliance/",
   },
   {
     id: 3,
@@ -358,5 +360,6 @@ export const ConnectCard = [
     description:
       "Let’s share ideas and opportunities—connect with me on LinkedIn.",
     image: linkedin,
+    link: "https://www.linkedin.com/in/ricardogovindasamy/",
   },
 ];

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import ToolCard from "./ToolCard";
 import PropTypes from "prop-types";
@@ -13,12 +13,9 @@ const GetTools = ({ filter }) => {
 
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // const [openDropdown, setOpenDropdown] = useState(null);
-
   const [selectedSubCatgeory, setSelectedSubCatgeory] = useState("");
 
   const [searchTerm, setSearchTerm] = useState("");
-
 
   const getCourse = useCallback(async () => {
     try {
@@ -27,10 +24,10 @@ const GetTools = ({ filter }) => {
         `https://backend.pmnetworkalliance.com/api/tools/get?page=${currentPage}&limit=12&category=${selectedCategory}&subcatgeory=${selectedSubCatgeory}&searchTerm=${searchTerm}`
       );
       setCoursesData(response.data.tools);
-      setTotalPages(response.data.totalPages); // Set total pages from the response
-      setLoading(false);
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error(error.message);
+    } finally {
       setLoading(false);
     }
   }, [currentPage, searchTerm, selectedCategory, selectedSubCatgeory]);
@@ -68,7 +65,7 @@ const GetTools = ({ filter }) => {
     setSelectedCategory("");
     setSearchTerm("");
     const value = event.target.value;
-    console.log("value:", value)
+    console.log("value:", value);
     setSelectedSubCatgeory(value);
   };
 
@@ -89,15 +86,14 @@ const GetTools = ({ filter }) => {
     }
   };
 
-  
   const { catgeorys } = useCategoryApi();
-  
+
   const { subCatgeorys } = useSubCategoryApi();
 
   return (
     <section>
       <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between lg:gap-52 gap-4">
-      {/* Search Input */}
+        {/* Search Input */}
         <div className="bg-[#12181A] border w-full max-w-md md:max-w-sm lg:w-[450px] flex items-center border-white border-opacity-10 rounded-full px-4 py-3">
           <input
             className="bg-transparent outline-none text-white flex-1"
@@ -115,7 +111,6 @@ const GetTools = ({ filter }) => {
         {/* Filters & Reset */}
         <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-2 gap-3 sm:gap-4 md:gap-6 w-full">
-            
             <div className="w-full col-span-2">
               <select
                 value={selectedCategory}
@@ -154,21 +149,31 @@ const GetTools = ({ filter }) => {
                 )}
               </select>
             </div>
-          {/* Reset Button */}
-          <button
-            onClick={resetFilters}
-            className="bg-red-600 col-span-1 text-white rounded-full py-2 px-4 hover:bg-red-700 transition "
-          >
-            Reset
-          </button>
+            {/* Reset Button */}
+            <button
+              onClick={resetFilters}
+              className="bg-red-600 col-span-1 text-white rounded-full py-2 px-4 hover:bg-red-700 transition "
+            >
+              Reset
+            </button>
           </div>
-
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10">
         {loading ? (
-          <p>Loading...</p> // Show loading state
+          <React.Fragment>
+            {[...Array(12)].map((_, index) => (
+              <div
+                key={index}
+                className="animate-pulse p-4 border rounded-lg bg-gray-100 dark:bg-gray-800"
+              >
+                <div className="h-32 bg-gray-300 rounded mb-4"></div>
+                <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+              </div>
+            ))}
+          </React.Fragment>
         ) : (
           coursesData &&
           coursesData?.map((card) => (
@@ -178,7 +183,7 @@ const GetTools = ({ filter }) => {
               description={card.shortDescription}
               duration={card.duration}
               link={card?.link}
-              image={card.imageUrl}
+              image={card?.imageUrl}
               category={card.category}
               filter={filter}
               deleteCourse={() => deleteCourse(card._id)}

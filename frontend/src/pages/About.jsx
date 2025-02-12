@@ -17,12 +17,14 @@ const About = () => {
             className="w-full lg:w-1/2 text-center lg:text-left relative z-10"
           >
             <h1 className="font-medium text-[30px] sm:text-[48px] lg:text-[65px] 2xl:text-[75px] leading-tight text-white tracking-tight">
-              Future-Ready Technology Professionals
+              Join The Community
             </h1>
             <p className="text-[#778A8F] mt-4 sm:mt-6 font-light text-base sm:text-lg lg:text-xl xl:text-xl !leading-[36px]">
-              Connect, Learn, and Stay Ahead in Tech Delivery. <br /> Join a
-              network of professionals shaping the future of project, program,
-              and product management.
+              Join a thriving community of technology professionals committed to
+              mastering emerging technologies, leading product teams, and
+              driving successful tech programs and projects. Gain valuable
+              insights, connect with industry leaders, and accelerate your
+              career in tech delivery.
             </p>
             <a href="https://thepmnetworkalliance.beehiiv.com/">
               <button className="mt-6 sm:mt-8 xl:mt-10 text-lg sm:text-lg font-semibold py-4 px-8 sm:py-5 sm:px-8 rounded-full tracking-[-0.2%] join_btn !leading-[14px]">
@@ -53,22 +55,16 @@ const About = () => {
             </h1>
             <p className="font-normal text-[17.72px] xl:text-[17.72px] leading-7 text-[#778A8F] mt-[26px]">
               The <span className="font-bold">PM network alliance</span> was
-              founded by{" "}
-              <span className="font-bold"> Govincorp Technology</span> group
-              with a clean purpose: to build a community where{" "}
-              <span className="font-bold">
-                {" "}
-                projects program, product managers, amd other technology
-                professionals
-              </span>{" "}
-              can connect, lean, and stay ahead of the rapidly evolving
-              landscape of technology delivery and execution. As technology
-              reshapes the way we work, we saq a growing gap - one where
-              delivery and execution. As technology reshapes the way we work, we
-              saq a growing gap - one where delivery & execution professionals
-              needed a dedicate space to exchange ideas, evaluate new tools, and
-              prepare for the future of work. PM network alliance is our way of
-              giving back, by creating a platform where professionals can come
+              founded by Govincorp Technology Group with a clear purpose: to
+              build a community where project, program, and product
+              managers—along with other technology professionals—can connect,
+              learn, and stay ahead of the rapidly evolving landscape of
+              technology delivery and execution. As technology reshapes the way
+              we work, we saw a growing gap—one where delivery & execution
+              professionals needed a dedicated space to exchange ideas, evaluate
+              new tools, and prepare for the future of work.{" "}
+              <span className="font-bold">PM network alliance</span> is our way
+              of giving back by creating a platform where professionals can come
               together to network, grow, and inspire each other.
             </p>
           </div>
@@ -100,11 +96,11 @@ const About = () => {
               Our Vision is Simple
             </h1>
             <p className="font-normal text-[17.72px] xl:text-[17.72px] leading-7 text-[#778A8F] mt-[26px]">
-              To provide faster, smarter, and move valuable career growth
+              To provide faster, smarter, and more valuable career growth
               opportunities by offering exclusive networking events, curated
-              insights, career development tools, and access to cutting -edge
-              methodologies that help our members thrive. through monthly events
-              hands-on tools reviews, we are setting a new standard for how
+              insights, career development tools, and access to cutting-edge
+              methodologies that help our members thrive. Through monthly events
+              and hands-on tool reviews, we are setting a new standard for how
               technology professionals navigate the future of delivery and
               execution in the tech industry.
             </p>
@@ -114,12 +110,8 @@ const About = () => {
         <div data-aos="fade-down">
           <div className="text-center">
             <h2 className="font-medium text-[30px] xl:text-[56px] nd:leading-[64px] text-white">
-              Let's Connect Together
+              Let&apos;s Connect
             </h2>
-            <p className="mt-4 text-[20px] xl:text-[20px] leading-[26.04px] text-[#778A8F] mx-auto max-w-[610px]">
-              We're not just managing programs, we’re shaping the future of how
-              work gets done.
-            </p>
           </div>
           <div className="mt-10 md:mt-[80px] md:pb-[100px] grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {ConnectCard.map((card) => (
@@ -155,9 +147,11 @@ const About = () => {
                   {card.description}
                 </p>
                 <div className="flex justify-end">
-                  <button className="px-4 py-2 border-2 mt-6 font-semibold text-sm border-[#00CCFF] text-white rounded-full hover:bg-[#00CCFF] transition-all">
-                    Let's Connect
+                 <a href={card.link}>
+                 <button className="px-4 py-2 border-2 mt-6 font-semibold text-sm border-[#00CCFF] text-white rounded-full hover:bg-[#00CCFF] transition-all">
+                    Let&apos;s Connect
                   </button>
+                 </a>
                 </div>
               </div>
             ))}
