@@ -40,13 +40,12 @@ const useCategoryApi = () => {
     setLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/create`, formData);
-      console.log("Category Created Response:", response.data); // Debugging
 
-      if (response.data && response.data._id) {
+      if (response.data) {
         setCatgeorys((prev) => [...prev, response.data]);
+      } else {
+        await GetCategorys();
       }
-  
-      await GetCategorys();
     } catch (error) {
       setError(error || "Error creating catgeory");
     } finally {
@@ -58,10 +57,10 @@ const useCategoryApi = () => {
   const updateCatgeory = async (id, updatedData) => {
     setLoading(true);
     try {
-      await axios.put(`${API_BASE_URL}/update/${id}`, updatedData);
-      setCatgeorys((prev) =>
-        prev.map((p) => (p._id === id ? { ...p, ...updatedData } : p))
-      );
+      const response = await axios.put(`${API_BASE_URL}/update/${id}`, updatedData);
+      if(response.status === 200){
+        await setCatgeorys();
+      }
     } catch (error) {
       setError(error || "Error updating catgeory");
     } finally {

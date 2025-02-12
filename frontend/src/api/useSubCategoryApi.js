@@ -56,10 +56,11 @@ const useSubCategoryApi = () => {
   const updateSubCatgeory = async (id, updatedData) => {
     setLoading(true);
     try {
-      await axios.put(`${API_BASE_URL}/update/${id}`, updatedData);
-      setSubcatgeorys((prev) =>
-        prev.map((p) => (p._id === id ? { ...p, ...updatedData } : p))
-      );
+      const response = await axios.put(`${API_BASE_URL}/update/${id}`, updatedData);
+      
+      if(response.status === 200){
+        await setSubcatgeorys();
+      }
     } catch (error) {
       setError(error || "Error updating subcatgeory");
     } finally {

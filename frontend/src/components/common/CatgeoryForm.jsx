@@ -25,9 +25,9 @@ const CatgeoryForm = ({ existingCatgeory, onSuccess }) => {
     e.preventDefault();
     try {
       if (existingCatgeory) {
-        updateCatgeory(existingCatgeory?._id, { name: formData.name });
+        await updateCatgeory(existingCatgeory?._id, { name: formData.name });
       } else {
-        createCatgeory({ name: formData.name });
+        await createCatgeory({ name: formData.name });
       }
 
       onSuccess();

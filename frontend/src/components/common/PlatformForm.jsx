@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react";
 import usePlatformApi from "../../api/usePlatformApi";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-
-const PlatformForm = ({
-  existingPlatform,
-  onSuccess,
-}) => {
-  const {
-    loading,
-    error,
-    createPlatform,
-    updatePlatform,
-  } = usePlatformApi();
+const PlatformForm = ({ existingPlatform, onSuccess }) => {
+  const { loading, error, createPlatform, updatePlatform } = usePlatformApi();
   const [formData, setFormData] = useState({
     name: "",
   });
@@ -25,9 +16,7 @@ const PlatformForm = ({
     }
   }, [existingPlatform]);
 
-  const handleChange = (
-    e
-  ) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -36,9 +25,9 @@ const PlatformForm = ({
     e.preventDefault();
     try {
       if (existingPlatform) {
-        updatePlatform(existingPlatform?._id, { name: formData.name });
+        await updatePlatform(existingPlatform?._id, { name: formData.name });
       } else {
-        createPlatform({ name: formData.name });
+        await createPlatform({ name: formData.name });
       }
 
       onSuccess();

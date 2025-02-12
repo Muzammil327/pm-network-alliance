@@ -36,9 +36,9 @@ const SubCatgeoryForm = ({
     e.preventDefault();
     try {
       if (existingSubCatgeory) {
-        updateSubCatgeory(existingSubCatgeory?._id, { name: formData.name });
+        await updateSubCatgeory(existingSubCatgeory?._id, { name: formData.name });
       } else {
-        createSubCatgeory({ name: formData.name });
+        await createSubCatgeory({ name: formData.name });
       }
 
       onSuccess();
