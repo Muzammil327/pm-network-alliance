@@ -80,13 +80,47 @@ const GetTool = async (req, res) => {
       ];
     }
 
-    const tools = await Tool.find(filter)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .populate("category", "name")
-      .populate("subcategory", "name")
-      .lean();
+    const tools = await Tool.aggregate([
+      { $match: filter }, // Apply filter
+      { $sort: { createdAt: -1 } }, // Sort by createdAt descending
+      { $skip: skip }, // Pagination: Skip documents
+      { $limit: limit }, // Limit the number of documents
+      {
+        $lookup: {
+          from: "categories", // Ensure this is the correct collection name
+          localField: "category",
+          foreignField: "_id",
+          as: "category",
+        },
+      },
+      { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } }, // Handle null cases
+      {
+        $lookup: {
+          from: "subcategories", // Ensure this is the correct collection name
+          localField: "subcategory",
+          foreignField: "_id",
+          as: "subcategory",
+        },
+      },
+      { $unwind: { path: "$subcategory", preserveNullAndEmptyArrays: true } }, // Handle null cases
+      {
+        $project: {
+          "category.name": 1,
+          "subcategory.name": 1,
+          _id: 1,
+          shortDescription: 1,
+          keyFeatures: 1,
+          toolName: 1,
+          link: 1,
+          extraNotes: 1,
+          imageUrl: 1,
+          source: 1,
+          createdAt: 1,
+          updatedAt: 1,
+        },
+      },
+    ]);
+    
 
       const formattedTools = tools.map((tool) => ({
         _id: tool._id,
@@ -98,6 +132,7 @@ const GetTool = async (req, res) => {
         link: tool.link,
         extraNotes: tool.extraNotes,
         imageUrl: tool.imageUrl,
+        source: tool.source,
         createdAt: tool.createdAt,
         updatedAt: tool.updatedAt,
       }));
