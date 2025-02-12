@@ -2,8 +2,14 @@ import mongoose from "mongoose";
 
 const CourseSchema = new mongoose.Schema(
   {
-    platform: { type: String, required: true },
-    categoryFocus: { type: String, required: true },
+    platform: {
+      ref: "platforms",
+      type: mongoose.Schema.Types.ObjectId,
+     },
+    categoryFocus: {
+      ref: "categories",
+      type: mongoose.Schema.Types.ObjectId,
+    },
     courseTitle: { type: String, required: true },
     keyPoints: { type: String, required: true },
     link: { type: String, required: true },
@@ -13,5 +19,5 @@ const CourseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Course = mongoose.model("courses", CourseSchema);
+const Course = mongoose.models["courses"] || mongoose.model("courses", CourseSchema);
 export default Course;

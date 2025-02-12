@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Course from "../model/CourseModel.js";
 import cloudinary from "../util/cloudinary.js";
 import formidable from "formidable";
@@ -12,8 +13,10 @@ const CreateCourse = async (req, res) => {
     }
 
     try {
-      const platform = fields.platform[0];
-      const categoryFocus = fields.categoryFocus[0];
+      const platform = new mongoose.Types.ObjectId(fields.platform[0]);
+      const categoryFocus = new mongoose.Types.ObjectId(
+        fields.categoryFocus[0]
+      );
       const courseTitle = fields.courseTitle[0];
       const link = fields.link[0];
       const duration = fields.duration[0];
@@ -56,8 +59,8 @@ const GetCourse = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1; // Default page to 1
     const limit = parseInt(req.query.limit) || 6; // Default limit to 6
-    const category = req.query.category?.trim();
-    const platform = req.query.platform?.trim();
+    const category = req.query.category;
+    const platform = req.query.platform;
     const searchTerm = req.query.searchTerm;
 
     const skip = (page - 1) * limit;
@@ -65,10 +68,10 @@ const GetCourse = async (req, res) => {
     let filter = {}; // Default: No filter
 
     if (category) {
-      filter.categoryFocus = category;
+      filter.categoryFocus = new mongoose.Types.ObjectId(category);
     }
     if (platform) {
-      filter.platform = platform;
+      filter.platform = new mongoose.Types.ObjectId(platform);
     }
     if (searchTerm) {
       filter.$or = [
@@ -80,12 +83,29 @@ const GetCourse = async (req, res) => {
     const courses = await Course.find(filter)
       .sort({ createdAt: -1 })
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .populate("categoryFocus", "name") // Populate category with only 'name' field
+      .populate("platform", "name") // Populate platform with only 'name' field
+      .lean(); // Converts Mongoose documents into plain JS objects
+
+    const formattedCourses = courses.map((course) => ({
+      _id: course._id,
+      platform: course.platform?.name || "N/A", // Extracting populated platform name
+      categoryFocus: course.categoryFocus?.name || "N/A", // Extracting populated category name
+      courseTitle: course.courseTitle,
+      keyPoints: course.keyPoints,
+      link: course.link,
+      duration: course.duration,
+      imageUrl: course.imageUrl,
+      createdAt: course.createdAt,
+      updatedAt: course.updatedAt,
+    }));
+
     const totalCourses = await Course.countDocuments(filter); // Count filtered courses
     const totalPages = Math.ceil(totalCourses / limit);
 
     res.json({
-      courses,
+      courses: formattedCourses,
       currentPage: page,
       totalPages,
       totalCourses,
@@ -119,8 +139,10 @@ const UpdateCourse = async (req, res) => {
     }
 
     try {
-      const platform = fields.platform?.[0];
-      const categoryFocus = fields.categoryFocus?.[0];
+      const platform = new mongoose.Types.ObjectId(fields.platform[0]);
+      const categoryFocus = new mongoose.Types.ObjectId(
+        fields.categoryFocus[0]
+      );
       const courseTitle = fields.courseTitle?.[0];
       const link = fields.link?.[0];
       const duration = fields.duration?.[0];
@@ -183,7 +205,7 @@ const DeleteCourse = async (req, res) => {
     }
 
     // Optionally, delete the image from Cloudinary
-    if(course.imageUrl){
+    if (course.imageUrl) {
       await cloudinary.uploader.destroy(course.imageUrl, {
         folder: "courses/images", // Make sure this matches the folder used during upload
       });

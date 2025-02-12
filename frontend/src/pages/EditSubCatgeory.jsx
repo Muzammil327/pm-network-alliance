@@ -1,24 +1,22 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import CourseForm from "../components/common/CourseForm";
+import axios from "axios";
+import SubCatgeoryForm from "../components/common/SubCatgeoryForm";
 
-const EditCourse = () => {
-  const { id } = useParams(); // Get course ID from URL
+const EditSubCatgeory = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     if (!id) return;
 
     const fetchCourse = async () => {
       try {
         const response = await axios.get(
-          `https://backend.pmnetworkalliance.com/api/courses/get/${id}`
+          `https://backend.pmnetworkalliance.com/api/subCategory/get/${id}`
         );
-        console.log("response", response);
         setSelectedCourse(response.data);
       } catch (error) {
         setError("Failed to load course data", error);
@@ -31,7 +29,7 @@ const EditCourse = () => {
   }, [id]);
 
   const handleSuccess = () => {
-    navigate("/dashboard/courses");
+    navigate("/dashboard/subcatgeory");
   };
 
   if (loading) return <p className="text-white">Loading...</p>;
@@ -41,12 +39,15 @@ const EditCourse = () => {
     <>
       <div className="text-center !py-20">
         <h1 className="my-3 sm:my-4 text-2xl sm:text-4xl md:text-5xl font-medium leading-tight text-white">
-          Edit Course
+          Edit Sub Catgeory
         </h1>
       </div>
-      <CourseForm existingCourse={selectedCourse} onSuccess={handleSuccess} />
+      <SubCatgeoryForm
+        existingSubCatgeory={selectedCourse}
+        onSuccess={handleSuccess}
+      />
     </>
   );
 };
 
-export default EditCourse;
+export default EditSubCatgeory;

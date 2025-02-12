@@ -1,6 +1,7 @@
 import Tool from "../model/ToolModel.js";
 import cloudinary from "../util/cloudinary.js";
 import formidable from "formidable";
+import mongoose from "mongoose";
 
 const CreateTool = async (req, res) => {
   const form = formidable();
@@ -13,8 +14,8 @@ const CreateTool = async (req, res) => {
 
     try {
       const toolName = fields.toolName[0];
-      const category = fields.category[0];
-      const subcategory = fields.subcategory[0];
+      const category = new mongoose.Types.ObjectId(fields.category[0]);
+      const subcategory = new mongoose.Types.ObjectId(fields.subcategory[0]);
       const link = fields.link[0];
       const shortDescription = fields.shortDescription[0];
       const keyFeatures = fields.keyFeatures[0];
@@ -57,8 +58,8 @@ const GetTool = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1; // Default to page 1
     const limit = parseInt(req.query.limit) || 6; // Default to limit of 6
-    const subcatgeory = req.query.subcatgeory?.trim();
-    const category = req.query.category?.trim();
+    const subcatgeory = req.query.subcatgeory;
+    const category = req.query.category;
     const searchTerm = req.query.searchTerm;
 
     const skip = (page - 1) * limit;
@@ -66,10 +67,10 @@ const GetTool = async (req, res) => {
     let filter = {}; // Default: No filter
 
     if (category) {
-      filter.category = category;
+      filter.category = new mongoose.Types.ObjectId(category);
     }
     if (subcatgeory) {
-      filter.subcategory = subcatgeory;
+      filter.subcategory = new mongoose.Types.ObjectId(subcatgeory);
     }
     if (searchTerm) {
       filter.$or = [
@@ -82,12 +83,30 @@ const GetTool = async (req, res) => {
     const tools = await Tool.find(filter)
       .sort({ createdAt: -1 })
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .populate("category", "name")
+      .populate("subcategory", "name")
+      .lean();
+
+      const formattedTools = tools.map((tool) => ({
+        _id: tool._id,
+        category: tool.category?.name || "N/A",
+        subcategory: tool.subcategory?.name || "N/A",
+        shortDescription: tool.shortDescription,
+        keyFeatures: tool.keyFeatures,
+        toolName: tool.toolName,
+        link: tool.link,
+        extraNotes: tool.extraNotes,
+        imageUrl: tool.imageUrl,
+        createdAt: tool.createdAt,
+        updatedAt: tool.updatedAt,
+      }));
+
     const totalTools = await Tool.countDocuments(filter);
     const totalPages = Math.ceil(totalTools / limit);
 
     res.json({
-      tools,
+      tools: formattedTools,
       currentPage: page,
       totalPages,
       totalTools,
@@ -122,8 +141,8 @@ const UpdateTool = async (req, res) => {
 
     try {
       const toolName = fields.toolName?.[0];
-      const category = fields.category?.[0];
-      const subcategory = fields.subcategory?.[0];
+      const category = new mongoose.Types.ObjectId(fields.category[0]);
+      const subcategory = new mongoose.Types.ObjectId(fields.subcategory[0]);
       const link = fields.link?.[0];
       const shortDescription = fields.shortDescription?.[0];
       const keyFeatures = fields.keyFeatures?.[0];
@@ -138,14 +157,14 @@ const UpdateTool = async (req, res) => {
 
       // Check if the tool exists
       const tool = await Tool.findById(req.params.id);
-    
+
       if (!tool) {
         return res.status(404).json({ message: "Tool not found" });
       }
 
       // If a new image is provided, upload it to Cloudinary
       let imageUrl;
-      
+
       if (files?.image?.[0]) {
         try {
           const uploadResponse = await cloudinary.uploader.upload(

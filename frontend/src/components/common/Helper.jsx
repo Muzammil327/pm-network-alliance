@@ -23,24 +23,28 @@ export const Whatexpect = [
     img: newsletter,
     profession: "Newsletter",
     desc: "Stay informed with the PM Network Alliance Newsletter—your go-to source for trends, insights, and AI in project and product management.",
+    link: "https://thepmnetworkalliance.beehiiv.com/",
   },
   {
     id: 2,
     img: meetup,
     profession: "Meetup Groups",
     desc: "Expand your network through PMNA meetups—virtual and in-person events designed for knowledge-sharing, career growth, and industry trends.",
+    link: "https://www.meetup.com/pm-network-alliance/",
   },
   {
     id: 3,
     img: aitoolbox,
     profession: "AI ToolBox",
     desc: "Unlock AI tools to streamline planning, automate tasks, and enhance execution—from predictive analytics to real-time collaboration.",
+    link: "/AiToolbox",
   },
   {
     id: 4,
     img: freecourse,
     profession: "Free Courses",
     desc: "Access on-demand courses to master AI-driven workflows, automation, and precision in project delivery and execution.",
+    link: "/freeCourse",
   },
 ];
 

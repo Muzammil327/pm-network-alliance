@@ -24,6 +24,20 @@ const Course = () => {
                 </button>
               </div>
             </a>
+            <a href="/dashboard/platform/add">
+              <div className="inline-block p-[2px] rounded-[200px] btn_animate">
+                <button className="bg-[#12181A] font-normal py-3 px-4  text-sm sm:text-base text-white rounded-[200px]">
+                  Add Platform
+                </button>
+              </div>
+            </a>
+            <a href="/dashboard/catgeory/add">
+              <div className="inline-block p-[2px] rounded-[200px] btn_animate">
+                <button className="bg-[#12181A] font-normal py-3 px-4  text-sm sm:text-base text-white rounded-[200px]">
+                  Add Catgeory
+                </button>
+              </div>
+            </a>
           </div>
 
          <GetCourse filter="admin"/>

@@ -1,60 +1,57 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
+import usePlatformApi from "../../api/usePlatformApi";
+import useCategoryApi from "../../api/useCategoryApi";
 
-interface ToolFormProps {
-  existingTool?: any; // Pass existing tool for edit mode
-  onSuccess: () => void; // Callback to refresh tool list
-}
-
-const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
+const CourseForm = ({ existingCourse, onSuccess }) => {
   const [formData, setFormData] = useState({
-    toolName: "",
-    category: "",
-    subcategory: "",
-    shortDescription: "",
-    keyFeatures: "",
+    platform: "",
+    categoryFocus: "",
+    courseTitle: "",
     link: "",
-    extraNotes: "",
-    imageFile: null as File | null,
+    duration: "N/A",
+    description: "",
+    imageFile: null, // Store image file
   });
 
-  const [existingImage, setExistingImage] = useState<string | null>(null);
+  console.log("formData platform:", formData.platform);
+
+  const [existingImage, setExistingImage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState("");
 
+  // Load existing data for edit mode
   useEffect(() => {
-    if (existingTool) {
+    if (existingCourse) {
       setFormData({
-        toolName: existingTool.toolName || "",
-        category: existingTool.category || "",
-        subcategory: existingTool.subcategory || "",
-        link: existingTool.link || "",
-        shortDescription: existingTool.shortDescription || "",
-        keyFeatures: existingTool.keyFeatures || "",
-        extraNotes: existingTool.extraNotes || "",
-        imageFile: null,
+        platform: existingCourse.platform || "",
+        categoryFocus: existingCourse.categoryFocus || "",
+        courseTitle: existingCourse.courseTitle || "",
+        link: existingCourse.link || "",
+        duration: existingCourse.duration || "N/A",
+        description: existingCourse.keyPoints || "",
+        imageFile: null, // Keep existing image unless changed
       });
-
-      setExistingImage(existingTool.imageUrl || null); // Store existing image URL
+      setExistingImage(existingCourse?.imageUrl ?? null);
     }
-  }, [existingTool]);
+  }, [existingCourse]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e) => {
     const file = e.target.files?.[0] || null;
     setFormData((prev) => ({ ...prev, imageFile: file }));
   };
 
-  const handleDeleteImage = async (imageUrl: string) => {
+  const handleDeleteImage = async (imageUrl) => {
     try {
       const response = await axios.delete(
-        "https://backend.pmnetworkalliance.com/api/tools/delete-image", {
+        "https://backend.pmnetworkalliance.com/api/courses/delete-image",
+        {
           data: { imageUrl },
         }
       );
@@ -66,104 +63,136 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
       console.error(error);
     }
   };
-  const handleSubmit = async (e: React.FormEvent) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
     try {
       const formDataToSend = new FormData();
-      Object.keys(formData).forEach((key) => {
-        const value = formData[key as keyof typeof formData];
-        if (key !== "imageFile" && typeof value === "string") {
-          formDataToSend.append(key, value);
-        }
-      });
 
+      // Append all text fields
+      formDataToSend.append("platform", formData.platform);
+      formDataToSend.append("categoryFocus", formData.categoryFocus);
+      formDataToSend.append("courseTitle", formData.courseTitle);
+      formDataToSend.append("link", formData.link);
+      formDataToSend.append("duration", formData.duration);
+      formDataToSend.append("description", formData.description);
+
+      // Append image file if it exists
       if (formData.imageFile) {
-        formDataToSend.append("image", formData.imageFile); // New image file
+        formDataToSend.append("image", formData.imageFile);
       } else if (existingImage) {
         formDataToSend.append("image", existingImage); // Keep existing image URL
       }
 
-      let response;
-      if (existingTool) {
-        response = await axios.put(
-          `https://backend.pmnetworkalliance.com/api/tools/update/${existingTool._id}`,
+      if (existingCourse) {
+        await axios.put(
+          `https://backend.pmnetworkalliance.com/api/courses/update/${existingCourse._id}`,
           formDataToSend,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
       } else {
-        response = await axios.post(
-          "https://backend.pmnetworkalliance.com/api/tools/create",
+        await axios.post(
+          "https://backend.pmnetworkalliance.com/api/courses/create",
           formDataToSend,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
       }
 
-      console.log("Response:", response.data);
-      onSuccess();
-
+      onSuccess(); // Refresh courses after submission
       setFormData({
-        toolName: "",
-        category: "",
-        subcategory: "",
+        platform: "",
+        categoryFocus: "",
+        courseTitle: "",
         link: "",
-        shortDescription: "",
-        keyFeatures: "",
-        extraNotes: "",
+        duration: "N/A",
+        description: "",
         imageFile: null,
       });
-
-      setExistingImage(null);
+      window.location.reload();
     } catch (error) {
-      setError("Failed to submit tool");
+      setError("Failed to submit course");
       console.error("Error:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const refreshImageUrl = (url: string) => `${url}?t=${Date.now()}`;
+  const refreshImageUrl = (url) => `${url}?t=${Date.now()}`;
+
+  const { platforms } = usePlatformApi();
+  const { catgeorys } = useCategoryApi();
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 my-10 lg:mx-80 md:mx-60 sm:mx-20 mx-10">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 my-10 lg:mx-80 md:mx-60 sm:mx-20 mx-10"
+    >
       <div>
         <label className="block text-sm mb-2 font-medium text-gray-100">
-          Tool Name
+          Platform
         </label>
-        <input
-          type="text"
-          name="toolName"
-          value={formData.toolName}
-          onChange={handleChange}
+        <select
+          name="platform"
+          value={formData.platform}
+          onChange={(e) =>
+            setFormData({ ...formData, platform: e.target.value })
+          }
           required
           className="mt-1 block w-full rounded-md border-gray-600 py-3 border px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-white"
-        />
+        >
+          <option value="" disabled>
+            Select a Platform
+          </option>
+          {platforms.map((platform) => (
+            <option
+              key={platform._id}
+              value={platform._id}
+              className="text-black"
+            >
+              {platform.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div>
+        <label className="block text-sm mb-2 font-medium text-gray-100">
+          Category/Focus
+        </label>
+        <select
+          name="categoryFocus"
+          value={formData.categoryFocus}
+          onChange={(e) =>
+            setFormData({ ...formData, categoryFocus: e.target.value })
+          }
+          required
+          className="mt-1 block w-full rounded-md border-gray-600 py-3 border px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-white"
+        >
+          <option value="" disabled>
+            Select a Category/Focus
+          </option>
+          {catgeorys.map((catgeorys) => (
+            <option
+              key={catgeorys._id}
+              value={catgeorys._id}
+              className="text-black"
+            >
+              {catgeorys.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>
         <label className="block text-sm mb-2 font-medium text-gray-100">
-          Category
+          Course Title
         </label>
         <input
           type="text"
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-          className="mt-1 block w-full rounded-md border-gray-600 py-3 border px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-white"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm mb-2 font-medium text-gray-100">
-          Sub Category
-        </label>
-        <input
-          type="text"
-          name="subcategory"
-          value={formData.subcategory}
+          name="courseTitle"
+          value={formData.courseTitle}
           onChange={handleChange}
           required
           className="mt-1 block w-full rounded-md border-gray-600 py-3 border px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-white"
@@ -186,11 +215,11 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
 
       <div>
         <label className="block text-sm mb-2 font-medium text-gray-100">
-          Short Description
+          Description
         </label>
         <textarea
-          name="shortDescription"
-          value={formData.shortDescription}
+          name="description"
+          value={formData.description}
           onChange={handleChange}
           required
           className="mt-1 block w-full rounded-md border-gray-600 py-3 border px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-white"
@@ -199,25 +228,12 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
 
       <div>
         <label className="block text-sm mb-2 font-medium text-gray-100">
-          Key Features
-        </label>
-        <textarea
-          name="keyFeatures"
-          value={formData.keyFeatures}
-          onChange={handleChange}
-          required
-          className="mt-1 block w-full rounded-md border-gray-600 py-3 border px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-white"
-        ></textarea>
-      </div>
-
-      <div>
-        <label className="block text-sm mb-2 font-medium text-gray-100">
-          Extra Notes
+          Duration
         </label>
         <input
           type="text"
-          name="extraNotes"
-          value={formData.extraNotes}
+          name="duration"
+          value={formData.duration}
           onChange={handleChange}
           className="mt-1 block w-full rounded-md border-gray-600 py-3 border px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-transparent text-white"
         />
@@ -236,8 +252,8 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
               className="w-full h-auto object-cover rounded-md"
             />
             <button
-              type="button" onClick={() => handleDeleteImage(existingImage)}
-
+              type="button"
+              onClick={() => handleDeleteImage(existingImage)}
               className="absolute top-2 right-2 bg-red-600 text-white rounded-full h-12 w-12 text-lg"
             >
               X
@@ -260,13 +276,21 @@ const ToolForm: React.FC<ToolFormProps> = ({ existingTool, onSuccess }) => {
         <button
           type="submit"
           disabled={loading}
-          className="bg-[#12181A] py-3 px-12 text-white rounded-[200px]"
+          className="bg-[#12181A] font-normal py-3 px-12 text-sm sm:text-base text-white rounded-[200px]"
         >
-          {loading ? "Loading..." : existingTool ? "Update Tool" : "Add Tool"}
+          {loading
+            ? "Loading..."
+            : existingCourse
+            ? "Update Course"
+            : "Add Course"}
         </button>
       </div>
     </form>
   );
 };
+CourseForm.propTypes = {
+  existingCourse: PropTypes.object,
+  onSuccess: PropTypes.func.isRequired,
+};
 
-export default ToolForm;
+export default CourseForm;

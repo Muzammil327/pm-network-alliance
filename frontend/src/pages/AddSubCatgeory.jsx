@@ -1,21 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import ToolForm from "../components/common/ToolForm";
+import SubCatgeoryForm from "../components/common/SubCatgeoryForm";
 
-const AddCourse = () => {
+const AddSubCatgeory = () => {
   const navigate = useNavigate();
   const handleSuccess = () => {
-    navigate("/dashboard/tools");
+    navigate("/dashboard/subcatgeory");
   };
   return (
     <>
       <div className="text-center !py-20">
         <h1 className="my-3 sm:my-4 text-2xl sm:text-4xl md:text-5xl font-medium leading-tight text-white">
-          Add Tool
+          Add Sub Catgeory
         </h1>
-      </div>{" "}
-      <ToolForm onSuccess={handleSuccess} />
+      </div>
+      <SubCatgeoryForm onSuccess={handleSuccess} />
     </>
   );
 };
 
-export default AddCourse;
+export default AddSubCatgeory;

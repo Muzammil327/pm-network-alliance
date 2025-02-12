@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import ToolCard from "./ToolCard";
 import PropTypes from "prop-types";
+import useCategoryApi from "../../api/useCategoryApi";
+import useSubCategoryApi from "../../api/useSubCategoryApi";
 
 const GetTools = ({ filter }) => {
   const [coursesData, setCoursesData] = useState([]);
@@ -9,42 +11,14 @@ const GetTools = ({ filter }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const [category, setCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   // const [openDropdown, setOpenDropdown] = useState(null);
 
-  const [subCatgeory, setSubCatgeory] = useState([]);
   const [selectedSubCatgeory, setSelectedSubCatgeory] = useState("");
 
   const [searchTerm, setSearchTerm] = useState("");
 
-  const getCatgeory = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://backend.pmnetworkalliance.com/api/tools/get-catgeory`
-      );
-      setCategory(response.data.categorys);
-      setLoading(false);
-    } catch (error) {
-      console.error(error.message);
-      setLoading(false);
-    }
-  };
-  const getSubCatgeory = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://backend.pmnetworkalliance.com/api/tools/get-subcatgeory`
-      );
-      setSubCatgeory(response.data.subcategory);
-      setLoading(false);
-    } catch (error) {
-      console.error(error.message);
-      setLoading(false);
-    }
-  };
 
   const getCourse = useCallback(async () => {
     try {
@@ -64,8 +38,6 @@ const GetTools = ({ filter }) => {
   useEffect(() => {
     if (!searchTerm) {
       getCourse(); // Load courses immediately when searchTerm is empty
-      getCatgeory();
-      getSubCatgeory();
       return;
     }
 
@@ -96,6 +68,7 @@ const GetTools = ({ filter }) => {
     setSelectedCategory("");
     setSearchTerm("");
     const value = event.target.value;
+    console.log("value:", value)
     setSelectedSubCatgeory(value);
   };
 
@@ -115,6 +88,12 @@ const GetTools = ({ filter }) => {
       console.error(error.message);
     }
   };
+
+  
+  const { catgeorys } = useCategoryApi();
+  
+  const { subCatgeorys } = useSubCategoryApi();
+
   return (
     <section>
       <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:justify-between lg:gap-52 gap-4">
@@ -144,10 +123,10 @@ const GetTools = ({ filter }) => {
                 className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
               >
                 <option value="">Select Category</option>
-                {category.length > 0 ? (
-                  category.map((data) => (
-                    <option key={data._id} value={data}>
-                      {data}
+                {catgeorys.length > 0 ? (
+                  catgeorys.map((data) => (
+                    <option key={data._id} value={data._id}>
+                      {data.name}
                     </option>
                   ))
                 ) : (
@@ -164,10 +143,10 @@ const GetTools = ({ filter }) => {
                 className="bg-[#12181A] text-white rounded-full border border-white border-opacity-10 py-2 px-4 cursor-pointer w-full"
               >
                 <option value="">Select Sub Catgeory</option>
-                {subCatgeory.length > 0 ? (
-                  subCatgeory.map((data) => (
-                    <option key={data._id} value={data}>
-                      {data}
+                {subCatgeorys.length > 0 ? (
+                  subCatgeorys.map((data) => (
+                    <option key={data._id} value={data._id}>
+                      {data.name}
                     </option>
                   ))
                 ) : (

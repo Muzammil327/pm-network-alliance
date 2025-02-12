@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div className="bg-[#121819] py-[64px] w-full mt-10">
       <div data-aos="fade-up" className="custom_container">
-        <img className="cursor-pointer" src={logo} alt="" />
+        <img className="cursor-pointer w-60" src={logo} alt="" />
 
         <div className="flex flex-col lg:flex-row tracking-[0.3px]">
           <div className="lg:w-7/12 w-full">
@@ -36,7 +36,7 @@ const Footer = () => {
 
           <div className="lg:w-1/3  w-full mt-5 lg:mt-0">
             <h4 className="font-normal text-base leading-6 text-white">
-              Get the freshest news from us
+              Stay updated with our latest news
             </h4>
             <div className="mt-3 flex">
               <input
@@ -44,9 +44,11 @@ const Footer = () => {
                 type="text"
                 placeholder="Your email address…"
               />
-              <button className="ms-2 px-4 py-2 rounded-[200px] font-semibold text-base join_btn">
-                Subscribe
-              </button>
+              <a href="https://thepmnetworkalliance.beehiiv.com/">
+                <button className="ms-2 px-4 py-2 rounded-[200px] font-semibold text-base join_btn">
+                  Subscribe
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -59,7 +61,7 @@ const Footer = () => {
           }}
         ></div>
         <p className="text-center mt-[48px] font-normal text-[12px]  leading-[16px] tracking-[0.26px] text-white">
-          All rights reserved PM Network Aliance 2025
+          All rights reserved PM Network Alliance 2025
         </p>
       </div>
     </div>

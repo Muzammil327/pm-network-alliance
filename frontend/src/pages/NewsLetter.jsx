@@ -23,9 +23,12 @@ const NewsLetter = () => {
           Stay ahead in the world of project management with expert insights,
           cutting-edge AI trends, and exclusive community updates.
         </p>
-        <button className="mt-8 sm:mt-12 join_btn text-base sm:text-lg font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full  !leading-[14px]">
-          Join Now for Free
-        </button>
+
+        <a href="https://thepmnetworkalliance.beehiiv.com/">
+          <button className="mt-8 sm:mt-12 join_btn text-base sm:text-lg font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full  !leading-[14px]">
+            Join Now for Free
+          </button>
+        </a>
       </div>
 
       {/* What You’ll Get Section */}

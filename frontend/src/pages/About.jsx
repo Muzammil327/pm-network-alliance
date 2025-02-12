@@ -24,9 +24,11 @@ const About = () => {
               network of professionals shaping the future of project, program,
               and product management.
             </p>
-            <button className="mt-6 sm:mt-8 xl:mt-10 text-lg sm:text-lg font-semibold py-4 px-8 sm:py-5 sm:px-8 rounded-full tracking-[-0.2%] join_btn !leading-[14px]">
-              Join Now for Free
-            </button>
+            <a href="https://thepmnetworkalliance.beehiiv.com/">
+              <button className="mt-6 sm:mt-8 xl:mt-10 text-lg sm:text-lg font-semibold py-4 px-8 sm:py-5 sm:px-8 rounded-full tracking-[-0.2%] join_btn !leading-[14px]">
+                Join Now for Free
+              </button>
+            </a>
           </div>
           {/* Right Image */}
           <div
@@ -126,7 +128,11 @@ const About = () => {
                 className="bg-[#12181A] rounded-xl shadow-lg p-6 border border-[#313B3D] cursor-pointer hover:border-[#00CCFF] transition-all"
               >
                 <div className="flex justify-between items-start">
-                  <img src={card.image} alt={card.title} className="w-10 h-10" />
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="w-10 h-10"
+                  />
                   <svg
                     width="24"
                     height="24"
@@ -145,7 +151,9 @@ const About = () => {
                 <h3 className="text-lg text-white font-medium mt-6">
                   {card.title}
                 </h3>
-                <p className="text-sm text-[#778A8F] mt-2">{card.description}</p>
+                <p className="text-sm text-[#778A8F] mt-2">
+                  {card.description}
+                </p>
                 <div className="flex justify-end">
                   <button className="px-4 py-2 border-2 mt-6 font-semibold text-sm border-[#00CCFF] text-white rounded-full hover:bg-[#00CCFF] transition-all">
                     Let's Connect

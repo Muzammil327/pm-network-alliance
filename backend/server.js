@@ -3,7 +3,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import userRoutes from "./routes/UserRoute.js";
 import courseRoutes from "./routes/CourseRoute.js";
+import categoryRoutes from "./routes/CategoryRoute.js";
+import subCategoryRoutes from "./routes/SubCategoryRoute.js";
 import toolRoutes from "./routes/ToolRoute.js";
+import platformRoutes from "./routes/PlatformRoute.js";
 import connectDB from "./util/dbConn.js";
 import cloudinary from "./util/cloudinary.js";
 
@@ -20,6 +23,9 @@ connectDB();
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/tools", toolRoutes);
+app.use("/api/category", categoryRoutes);
+app.use("/api/subCategory", subCategoryRoutes);
+app.use("/api/platform", platformRoutes);
 
 // Delete image of cloudinary
 // app.delete("/api/delete-image", async (req, res) => {

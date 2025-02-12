@@ -21,9 +21,12 @@ const FreeCourse = () => {
           Gain practical skills, stay ahead of emerging trends, and enhance your
           ability to deliver results in the tech industry.
         </p>
+       
+        <a href="https://thepmnetworkalliance.beehiiv.com/">
         <button className="mt-6 sm:mt-8 lg:mt-[48px]  text-lg sm:text-lg font-semibold py-4 px-8 sm:py-5 sm:px-8 rounded-full  !leading-[14px] tracking-[-0.2%] join_btn">
           Join Now for Free
         </button>
+        </a>
       </div>
 
       {/* courses */}
@@ -35,7 +38,7 @@ const FreeCourse = () => {
             </button>
           </div>
           <h1 className="my-3 sm:my-4 text-2xl sm:text-4xl md:text-5xl font-medium leading-tight text-white">
-            Explore Our Free AI Courses
+            Explore Free AI Courses
           </h1>
           <p className="text-[#778A8F] font-normal text-sm sm:text-lg md:text-xl leading-6 sm:leading-7">
             Browse & Enroll in Courses Tailored to Your Needs
