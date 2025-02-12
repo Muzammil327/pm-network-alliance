@@ -5,6 +5,7 @@ const AddCatgeory = () => {
   const navigate = useNavigate();
   const handleSuccess = () => {
     navigate("/dashboard/catgeory");
+    window.location.reload();
   };
   return (
     <>
