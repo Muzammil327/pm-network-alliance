@@ -40,11 +40,13 @@ const useCategoryApi = () => {
     setLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/create`, formData);
-      if (response.data) {
-        setCatgeorys((prev) => [...prev, response.data]); // Add new category to state
-      } else {
-        await GetCategorys(); // Fallback: Fetch the updated list
+      console.log("Category Created Response:", response.data); // Debugging
+
+      if (response.data && response.data._id) {
+        setCatgeorys((prev) => [...prev, response.data]);
       }
+  
+      await GetCategorys();
     } catch (error) {
       setError(error || "Error creating catgeory");
     } finally {
