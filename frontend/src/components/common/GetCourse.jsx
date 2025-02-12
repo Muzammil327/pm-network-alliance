@@ -154,39 +154,31 @@ const GetCourse = ({ filter }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
-        {loading ? (
-          <React.Fragment>
-            {[...Array(12)].map((_, index) => (
-              <div
-                key={index}
-                className="animate-pulse p-4 border rounded-lg bg-gray-100 dark:bg-gray-800"
-              >
-                <div className="h-48 bg-gray-300 rounded mb-4"></div>
-                <div className="h-4 bg-gray-300 rounded mb-2"></div>
-                <div className="h-16 bg-gray-300 rounded mb-2"></div>
-                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-              </div>
+      {loading ? (
+        <React.Fragment>
+          <div className="flex-center h-screen w-full flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 border-4 border-gray-300 border-t-[#00ccff] rounded-full animate-spin"></div>
+          </div>
+        </React.Fragment>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
+          {coursesData &&
+            coursesData?.map((course) => (
+              <CourseCard
+                key={course._id}
+                title={course.courseTitle}
+                description={course.keyPoints}
+                duration={course.duration}
+                link={course?.link}
+                image={course.imageUrl}
+                categoryFocus={course.categoryFocus}
+                filter={filter}
+                deleteCourse={() => deleteCourse(course._id)}
+                updateCourse={`/dashboard/courses/edit/${course._id}`}
+              />
             ))}
-          </React.Fragment>
-        ) : (
-          coursesData &&
-          coursesData?.map((course) => (
-            <CourseCard
-              key={course._id}
-              title={course.courseTitle}
-              description={course.keyPoints}
-              duration={course.duration}
-              link={course?.link}
-              image={course.imageUrl}
-              categoryFocus={course.categoryFocus}
-              filter={filter}
-              deleteCourse={() => deleteCourse(course._id)}
-              updateCourse={`/dashboard/courses/edit/${course._id}`}
-            />
-          ))
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Pagination controls */}
       <div className="text-center pb-10 mt-8">
