@@ -127,14 +127,14 @@ const GetTool = async (req, res) => {
         category: tool.category?.name || "N/A",
         subcategory: tool.subcategory?.name || "N/A",
         shortDescription: tool.shortDescription,
-        keyFeatures: tool.keyFeatures,
-        toolName: tool.toolName,
-        link: tool.link,
-        extraNotes: tool.extraNotes,
-        imageUrl: tool.imageUrl,
-        source: tool.source,
-        createdAt: tool.createdAt,
-        updatedAt: tool.updatedAt,
+        // keyFeatures: tool.keyFeatures,
+        // toolName: tool.toolName,
+        // link: tool.link,
+        // extraNotes: tool.extraNotes,
+        // imageUrl: tool.imageUrl,
+        // source: tool.source,
+        // createdAt: tool.createdAt,
+        // updatedAt: tool.updatedAt,
       }));
 
     const totalTools = await Tool.countDocuments(filter);
