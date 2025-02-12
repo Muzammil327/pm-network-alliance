@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import ToolForm from "../components/common/ToolForm";
 
 const EditTool = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +30,7 @@ const EditTool = () => {
   }, [id]);
 
   const handleSuccess = () => {
-    navigate("/dashboard/tools");
+    window.location.href = "/dashboard/tools";
   };
 
   if (loading) return <p className="text-white">Loading...</p>;

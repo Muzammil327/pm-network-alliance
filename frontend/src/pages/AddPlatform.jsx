@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import PlatformForm from "../components/common/PlatformForm";
 
 const AddPlatform = () => {
-  const navigate = useNavigate();
-  const handleSuccess = () => {
-    navigate("/dashboard/platform");
+  const handleSuccess = () => {    
+    window.location.href = "/dashboard/platform";
   };
   return (
     <>

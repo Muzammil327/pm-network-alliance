@@ -1,10 +1,8 @@
 import CourseForm from "../components/common/CourseForm";
-import { useNavigate } from "react-router-dom";
 
 const AddCourse = () => {
-  const navigate = useNavigate();
   const handleSuccess = () => {
-    navigate("/dashboard/courses");
+    window.location.href = "/dashboard/courses";
   };
   return (
     <>

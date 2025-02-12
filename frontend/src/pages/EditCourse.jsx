@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CourseForm from "../components/common/CourseForm";
 
 const EditCourse = () => {
   const { id } = useParams(); // Get course ID from URL
-  const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +30,7 @@ const EditCourse = () => {
   }, [id]);
 
   const handleSuccess = () => {
-    navigate("/dashboard/courses");
+    window.location.href = "/dashboard/courses";
   };
 
   if (loading) return <p className="text-white">Loading...</p>;

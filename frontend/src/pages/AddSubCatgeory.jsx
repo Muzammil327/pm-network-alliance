@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import SubCatgeoryForm from "../components/common/SubCatgeoryForm";
 
 const AddSubCatgeory = () => {
-  const navigate = useNavigate();
   const handleSuccess = () => {
-    navigate("/dashboard/subcatgeory");
+    window.location.href = "/dashboard/subcatgeory";
   };
   return (
     <>

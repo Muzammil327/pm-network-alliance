@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import SubCatgeoryForm from "../components/common/SubCatgeoryForm";
 
 const EditSubCatgeory = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,7 +28,7 @@ const EditSubCatgeory = () => {
   }, [id]);
 
   const handleSuccess = () => {
-    navigate("/dashboard/subcatgeory");
+    window.location.href = "/dashboard/subcatgeory";
   };
 
   if (loading) return <p className="text-white">Loading...</p>;

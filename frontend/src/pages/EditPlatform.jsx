@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import PlatformForm from "../components/common/PlatformForm";
 
 const EditPlatform = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,7 +29,7 @@ const EditPlatform = () => {
   }, [id]);
 
   const handleSuccess = () => {
-    navigate("/dashboard/platform");
+    window.location.href = "/dashboard/platform";
   };
 
   if (loading) return <p className="text-white">Loading...</p>;
