@@ -21,7 +21,7 @@ const GetCourse = ({ filter }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/courses/get?page=${currentPage}&limit=6&category=${selectedCategory}&platform=${selectedPlatform}&searchTerm=${searchTerm}`
+        `https://backend.pmnetworkalliance.com/api/courses/get?page=${currentPage}&limit=6&category=${selectedCategory}&platform=${selectedPlatform}&searchTerm=${searchTerm}`
       );
       setCoursesData(response.data.courses);
       setTotalPages(response.data.totalPages);
