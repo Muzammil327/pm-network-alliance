@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div className="bg-[#121819] py-[64px] w-full mt-10">
       <div data-aos="fade-up" className="custom_container">
-        <img className="cursor-pointer w-60" src={logo} alt="" />
+        <img className="cursor-pointer w-80" src={logo} alt="" />
 
         <div className="flex flex-col lg:flex-row tracking-[0.3px]">
           <div className="lg:w-7/12 w-full">

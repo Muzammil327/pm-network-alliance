@@ -57,8 +57,8 @@ const CreateCourse = async (req, res) => {
 
 const GetCourse = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1; // Default page to 1
-    const limit = parseInt(req.query.limit) || 6; // Default limit to 6
+    const page = parseInt(req.query.page, 10) || 1; // Default page to 1
+    const limit = parseInt(req.query.limit, 10) || 6; // Default limit to 6
     const category = req.query.category;
     const platform = req.query.platform;
     const searchTerm = req.query.searchTerm;
@@ -81,13 +81,10 @@ const GetCourse = async (req, res) => {
     }
 
     const courses = await Course.find(filter)
-      .sort({ createdAt: -1 })
+      .populate("categoryFocus", "name")
+      .populate("platform", "name")
       .skip(skip)
-      .limit(limit)
-      .populate("categoryFocus", "name") // Populate category with only 'name' field
-      .populate("platform", "name") // Populate platform with only 'name' field
-      .lean(); // Converts Mongoose documents into plain JS objects
-
+      .limit(limit);
     const formattedCourses = courses.map((course) => ({
       _id: course._id,
       platform: course.platform?.name || "N/A", // Extracting populated platform name

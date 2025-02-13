@@ -21,7 +21,7 @@ const GetCourse = ({ filter }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://backend.pmnetworkalliance.com/api/courses/get?page=${currentPage}&limit=6&category=${selectedCategory}&platform=${selectedPlatform}&searchTerm=${searchTerm}`
+        `http://localhost:5000/api/courses/get?page=${currentPage}&limit=6&category=${selectedCategory}&platform=${selectedPlatform}&searchTerm=${searchTerm}`
       );
       setCoursesData(response.data.courses);
       setTotalPages(response.data.totalPages);
@@ -46,20 +46,20 @@ const GetCourse = ({ filter }) => {
 
   useEffect(() => {
     if (!searchTerm) {
-      getCourse(); // Load courses immediately when searchTerm is empty
+      getCourse();
       return;
     }
 
     const delayDebounce = setTimeout(() => {
-      getCourse(); // Delay API call when searchTerm is typed
+      getCourse();
     }, 2000);
 
     return () => clearTimeout(delayDebounce);
   }, [currentPage, getCourse, searchTerm]);
 
   const handlePageChange = (page) => {
-    if (page < 1 || page > totalPages) return; // Prevent invalid page changes
-    setCurrentPage(page); // Set the current page
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
   };
 
   const handleCategoryChange = (event) => {

@@ -442,7 +442,7 @@ export const ConnectCard = [
     description:
       "Join the conversation, build connections—your local meet-up awaits.",
     image: connect,
-    link: "https://www.meetup.com/pm-network-alliance/",
+    link: "https://thepmnetworkalliance.beehiiv.com/",
   },
   {
     id: 2,

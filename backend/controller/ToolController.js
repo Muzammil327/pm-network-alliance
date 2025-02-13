@@ -81,26 +81,24 @@ const GetTool = async (req, res) => {
     }
 
     const tools = await Tool.find(filter)
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit)
       .populate("category", "name")
       .populate("subcategory", "name")
-      .lean();
+      .skip(skip)
+      .limit(limit);
 
-      const formattedTools = tools.map((tool) => ({
-        _id: tool._id,
-        category: tool.category?.name || "N/A",
-        subcategory: tool.subcategory?.name || "N/A",
-        shortDescription: tool.shortDescription,
-        keyFeatures: tool.keyFeatures,
-        toolName: tool.toolName,
-        link: tool.link,
-        extraNotes: tool.extraNotes,
-        imageUrl: tool.imageUrl,
-        createdAt: tool.createdAt,
-        updatedAt: tool.updatedAt,
-      }));
+    const formattedTools = tools.map((tool) => ({
+      _id: tool._id,
+      category: tool.category?.name || "N/A",
+      subcategory: tool.subcategory?.name || "N/A",
+      shortDescription: tool.shortDescription,
+      keyFeatures: tool.keyFeatures,
+      toolName: tool.toolName,
+      link: tool.link,
+      extraNotes: tool.extraNotes,
+      imageUrl: tool.imageUrl,
+      createdAt: tool.createdAt,
+      updatedAt: tool.updatedAt,
+    }));
 
     const totalTools = await Tool.countDocuments(filter);
     const totalPages = Math.ceil(totalTools / limit);
