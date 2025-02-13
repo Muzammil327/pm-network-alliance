@@ -173,7 +173,7 @@ const HeroPage = () => {
                           <img
                             src={item.img}
                             alt="testimonial"
-                            className="w-full h-full rounded-full object-cover"
+                            className="w-full h-full rounded-full object-contain"
                           />
                         </div>
                         <div className="ms-3">
