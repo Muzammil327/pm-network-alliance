@@ -121,8 +121,8 @@ const HeroPage = () => {
                 <p className="mt-2 text-[#778A8F] font-medium text-sm sm:text-base">
                   {item.desc}
                 </p>
-                <a href={item.link}>
-                <button className="text-[#00CCFF] mt-1 font-medium text-sm sm:text-base"  target="_blank">
+                <a href={item.link} target="_blank">
+                <button className="text-[#00CCFF] mt-1 font-medium text-sm sm:text-base">
                   Learn More
                 </button>
                 </a>
