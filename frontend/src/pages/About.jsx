@@ -26,7 +26,7 @@ const About = () => {
               insights, connect with industry leaders, and accelerate your
               career in tech delivery.
             </p>
-            <a href="https://thepmnetworkalliance.beehiiv.com/">
+            <a href="https://thepmnetworkalliance.beehiiv.com/" target="_blank">
               <button className="mt-6 sm:mt-8 xl:mt-10 text-lg sm:text-lg font-semibold py-4 px-8 sm:py-5 sm:px-8 rounded-full tracking-[-0.2%] join_btn !leading-[14px]">
                 Join Now for Free
               </button>
@@ -147,7 +147,7 @@ const About = () => {
                   {card.description}
                 </p>
                 <div className="flex justify-end">
-                 <a href={card.link}>
+                 <a href={card.link}  target="_blank">
                  <button className="px-4 py-2 border-2 mt-6 font-semibold text-sm border-[#00CCFF] text-white rounded-full hover:bg-[#00CCFF] transition-all">
                     Let&apos;s Connect
                   </button>

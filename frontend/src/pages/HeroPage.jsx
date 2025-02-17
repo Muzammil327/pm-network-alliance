@@ -54,7 +54,7 @@ const HeroPage = () => {
               network of professionals shaping the future of project, program,
               and product management.
             </p>
-            <a href="https://thepmnetworkalliance.beehiiv.com/">
+            <a href="https://thepmnetworkalliance.beehiiv.com/" target="_blank">
               <button className="mt-6 sm:mt-8 2xl:mt-[48px] text-lg sm:text-lg font-semibold py-4 px-8 sm:py-5 sm:px-8 rounded-full  !leading-[14px] tracking-[-0.2%] join_btn">
                 Join Now
               </button>
@@ -122,7 +122,7 @@ const HeroPage = () => {
                   {item.desc}
                 </p>
                 <a href={item.link}>
-                <button className="text-[#00CCFF] mt-1 font-medium text-sm sm:text-base">
+                <button className="text-[#00CCFF] mt-1 font-medium text-sm sm:text-base"  target="_blank">
                   Learn More
                 </button>
                 </a>

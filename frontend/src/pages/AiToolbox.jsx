@@ -24,7 +24,7 @@ const AiToolbox = () => {
           decisions with the right AI-powered solutions.
         </p>
 
-        <a href="https://thepmnetworkalliance.beehiiv.com/">
+        <a href="https://thepmnetworkalliance.beehiiv.com/" target="_blank">
           <button className="mt-6 sm:mt-8 lg:mt-[48px]  text-lg sm:text-lg font-semibold py-4 px-8 sm:py-5 sm:px-8 rounded-full  !leading-[14px] tracking-[-0.2%] join_btn">
             Join Now for Free
           </button>

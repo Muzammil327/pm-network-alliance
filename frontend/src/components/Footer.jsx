@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div className="bg-[#121819] py-[64px] w-full mt-10">
       <div data-aos="fade-up" className="custom_container">
-        <img className="cursor-pointer w-80" src={logo} alt="" />
+        <img className="cursor-pointer w-96" src={logo} alt="" />
 
         <div className="flex flex-col lg:flex-row tracking-[0.3px]">
           <div className="lg:w-7/12 w-full">
@@ -44,7 +44,7 @@ const Footer = () => {
                 type="text"
                 placeholder="Your email address…"
               />
-              <a href="https://thepmnetworkalliance.beehiiv.com/">
+              <a href="https://thepmnetworkalliance.beehiiv.com/" target="_blank">
                 <button className="ms-2 px-4 py-2 rounded-[200px] font-semibold text-base join_btn">
                   Subscribe
                 </button>

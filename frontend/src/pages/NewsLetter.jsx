@@ -24,7 +24,7 @@ const NewsLetter = () => {
           cutting-edge AI trends, and exclusive community updates.
         </p>
 
-        <a href="https://thepmnetworkalliance.beehiiv.com/">
+        <a href="https://thepmnetworkalliance.beehiiv.com/" target="_blank">
           <button className="mt-8 sm:mt-12 join_btn text-base sm:text-lg font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full  !leading-[14px]">
             Join Now for Free
           </button>

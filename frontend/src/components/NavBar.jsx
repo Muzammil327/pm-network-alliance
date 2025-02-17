@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../assets/images/png/logo.png";
+import logo from "../assets/logo.svg";
 
 const NavBar = () => {
   const [navOpen, setNavOpen] = useState(false);
@@ -31,7 +31,7 @@ const NavBar = () => {
         >
           {/* Logo */}
           <div>
-            <img className="cursor-pointer w-80" src={logo} alt="logo" />
+            <img className="cursor-pointer h-20 w-full" src="/logo.jpg" alt="logo" />
           </div>
 
           {/* Navigation for large screens */}
