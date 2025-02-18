@@ -138,7 +138,7 @@ export default function CourseCard({
 
             {/* User "Read More" Button */}
             {filter === "user" && (
-              <a href={link}>
+              <a href={link} target="_blank">
                 <button className="px-3 sm:px-4 py-2 border-2 font-semibold text-xs sm:text-sm border-[#00CCFF] text-white rounded-[200px] hover:border-transparent hover:bg-[#00CCFF] transition-all">
                   Take Course
                 </button>

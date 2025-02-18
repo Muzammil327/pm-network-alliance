@@ -147,7 +147,7 @@ const About = () => {
                   {card.description}
                 </p>
                 <div className="flex justify-end">
-                 <a href={card.link}  target="_blank">
+                 <a href={card.link} target="_blank">
                  <button className="px-4 py-2 border-2 mt-6 font-semibold text-sm border-[#00CCFF] text-white rounded-full hover:bg-[#00CCFF] transition-all">
                     Let&apos;s Connect
                   </button>

@@ -66,7 +66,7 @@ export default function ToolCard({
 
         {/* User Button */}
         {filter === "user" && (
-          <a href={link}>
+          <a href={link} target="_blank">
             <button className="px-3 sm:px-4 py-2 border-2 font-semibold text-xs sm:text-sm border-[#00CCFF] text-white rounded-full hover:border-transparent hover:bg-[#00CCFF] transition-all">
             Go To Tool
             </button>

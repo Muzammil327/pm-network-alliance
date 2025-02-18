@@ -46,7 +46,7 @@ const HeroPage = () => {
             data-aos="fade-right"
             className="w-full lg:w-1/2 text-center lg:text-left relative z-10"
           >
-            <h1 className="font-medium text-[36px] sm:text-[48px] lg:text-[75px] 2xl:text-[88px]  text-white tracking-tight !leading-[96px]">
+            <h1 className="font-medium text-[36px] sm:text-[48px] lg:text-[75px] 2xl:text-[88px]  text-white tracking-tight md:!leading-[96px] sm:!leading-[66px] leading-[40px]">
               Future-Ready Technology Professionals
             </h1>
             <p className="text-[#778A8F] mt-4 sm:mt-6 font-light text-base sm:text-lg lg:text-xl 2xl:text-2xl">
@@ -70,7 +70,7 @@ const HeroPage = () => {
             <img
               src={HeroImage}
               alt="HeroPage"
-              className="w-10/12 md:w-[80%] 2xl:w-[90%]"
+              className="w-10/12 md:w-[80%] 2xl:w-[90%] md:mt-0 mt-2"
             />
             <div className="absolute lg:right-[-60%] -z-10 top-[-43%]">
               <BoxShadow />
