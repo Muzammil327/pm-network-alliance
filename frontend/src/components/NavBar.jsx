@@ -30,7 +30,7 @@ const NavBar = () => {
         >
           {/* Logo */}
           <div>
-            <img className="cursor-pointer md:h-20 h-10 w-full" src="/logo.jpg" alt="logo" />
+            <img className="cursor-pointer md:h-20 h-10" src="/logo.jpg" alt="logo" />
           </div>
 
           {/* Navigation for large screens */}
