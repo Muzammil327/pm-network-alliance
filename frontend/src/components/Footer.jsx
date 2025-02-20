@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import { NavLink } from "react-router-dom";
-
+// Hello
 const Footer = () => {
   return (
     <div className="bg-[#121819] py-[64px] w-full mt-10">
