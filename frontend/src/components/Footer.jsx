@@ -1,12 +1,11 @@
-import React from "react";
-import logo from "../assets/images/png/logo.png";
+import logo from "./logo.svg";
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="bg-[#121819] py-[64px] w-full mt-10">
       <div data-aos="fade-up" className="custom_container">
-        <img className="cursor-pointer w-72" src={logo} alt="" />
+        <img className="cursor-pointer w-[14rem]" src={logo} alt="" />
 
         <div className="flex flex-col lg:flex-row tracking-[0.3px]">
           <div className="lg:w-7/12 w-full">
